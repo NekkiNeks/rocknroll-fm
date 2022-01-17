@@ -27,10 +27,14 @@ export function AppProvider({children}) {
     dispatch({type: 'UPDATE_SONG', payload: {title, artist}});
   }
 
+  async function playStream() {
+    await TrackPlayer.add([trackdata]);
+    TrackPlayer.play();
+  }
+
   async function startPlayer() {
     try {
       await TrackPlayer.setupPlayer();
-      await TrackPlayer.add([trackdata]);
       dispatch({type: 'END_LOADING'});
     } catch (err) {
       console.log(err);
@@ -49,6 +53,7 @@ export function AppProvider({children}) {
         testReducer,
         TrackPlayer,
         startPlayer,
+        playStream,
       }}>
       {children}
     </AppContext.Provider>

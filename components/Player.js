@@ -3,7 +3,8 @@ import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import {useGlobalContext} from './context';
 
 export function Player(style) {
-  const {TrackPlayer, startPlayer, state, testReducer} = useGlobalContext();
+  const {TrackPlayer, startPlayer, playStream, state, testReducer} =
+    useGlobalContext();
 
   useEffect(() => {
     startPlayer();
@@ -24,7 +25,7 @@ export function Player(style) {
       <Text style={styles.title}>Song name: {title}</Text>
       <Text style={styles.artist}>Artist: {artist}</Text>
       <View style={styles.buttons}>
-        <TouchableOpacity onPress={() => TrackPlayer.play()} title={'play'}>
+        <TouchableOpacity onPress={() => playStream()} title={'play'}>
           <Text>Play</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => TrackPlayer.pause()}>
