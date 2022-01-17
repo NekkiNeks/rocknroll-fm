@@ -10,6 +10,12 @@ function reducer(state, action) {
     case 'UPDATE_SONG': {
       return {...state, trackInfo: action.payload};
     }
+    case 'PLAYER_PLAY': {
+      return {...state, playerState: {isPlaying: true}};
+    }
+    case 'PLAYER_PAUSE': {
+      return {...state, playerState: {isPlaying: false}};
+    }
     default: {
       return state;
     }

@@ -3,8 +3,14 @@ import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import {useGlobalContext} from './context';
 
 export function Player(style) {
-  const {TrackPlayer, startPlayer, playStream, state, testReducer} =
-    useGlobalContext();
+  const {
+    TrackPlayer,
+    startPlayer,
+    playStream,
+    pauseStream,
+    state,
+    testReducer,
+  } = useGlobalContext();
 
   useEffect(() => {
     startPlayer();
@@ -12,6 +18,7 @@ export function Player(style) {
   }, []);
 
   const {title, artist} = state.trackInfo;
+  const {isPlaying} = state.playerState;
 
   if (state.loading) {
     return (
@@ -25,14 +32,15 @@ export function Player(style) {
       <Text style={styles.title}>Song name: {title}</Text>
       <Text style={styles.artist}>Artist: {artist}</Text>
       <View style={styles.buttons}>
-        <TouchableOpacity onPress={() => playStream()} title={'play'}>
-          <Text>Play</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => TrackPlayer.pause()}>
-          <Text>Pause</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => TrackPlayer.stop()}>
-          <Text>Stop</Text>
+        <TouchableOpacity
+          onPress={() => {
+            if (!isPlaying) {
+              return playStream();
+            }
+            return pauseStream();
+          }}
+          title={'play'}>
+          <Text>{isPlaying ? 'pause' : 'play'}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {

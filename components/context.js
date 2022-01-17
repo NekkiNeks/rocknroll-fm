@@ -15,6 +15,9 @@ export function AppProvider({children}) {
       title: 'RNRFM',
       artist: 'RNRFM',
     },
+    playerState: {
+      isPlaying: false,
+    },
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -29,7 +32,13 @@ export function AppProvider({children}) {
 
   async function playStream() {
     await TrackPlayer.add([trackdata]);
+    dispatch({type: 'PLAYER_PLAY'});
     TrackPlayer.play();
+  }
+
+  function pauseStream() {
+    dispatch({type: 'PLAYER_PAUSE'});
+    TrackPlayer.pause();
   }
 
   async function startPlayer() {
@@ -54,6 +63,7 @@ export function AppProvider({children}) {
         TrackPlayer,
         startPlayer,
         playStream,
+        pauseStream,
       }}>
       {children}
     </AppContext.Provider>
