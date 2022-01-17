@@ -3,16 +3,16 @@ import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import {useGlobalContext} from './context';
 
 export function Player(style) {
-  const {loading, TrackPlayer, startPlayer, trackInfo} = useGlobalContext();
+  const {TrackPlayer, startPlayer, state, testReducer} = useGlobalContext();
 
   useEffect(() => {
     startPlayer();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const {title, artist} = trackInfo;
+  const {title, artist} = state.trackInfo;
 
-  if (loading) {
+  if (state.loading) {
     return (
       <View>
         <Text>Loading...</Text>
@@ -24,10 +24,7 @@ export function Player(style) {
       <Text style={styles.title}>Song name: {title}</Text>
       <Text style={styles.artist}>Artist: {artist}</Text>
       <View style={styles.buttons}>
-        <TouchableOpacity
-          onPress={() => TrackPlayer.play()}
-          title={'play'}
-          style={styles.button}>
+        <TouchableOpacity onPress={() => TrackPlayer.play()} title={'play'}>
           <Text>Play</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => TrackPlayer.pause()}>
@@ -35,6 +32,13 @@ export function Player(style) {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => TrackPlayer.stop()}>
           <Text>Stop</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            testReducer();
+            console.log(state);
+          }}>
+          <Text>TEST REDUCER</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -52,6 +56,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
   },
   button: {
