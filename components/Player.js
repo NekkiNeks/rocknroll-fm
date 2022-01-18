@@ -1,21 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import {useGlobalContext} from './context';
 
 export function Player(style) {
-  const {
-    TrackPlayer,
-    startPlayer,
-    playStream,
-    pauseStream,
-    state,
-    testReducer,
-  } = useGlobalContext();
-
-  // useEffect(() => {
-  //   startPlayer();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const {playStream, pauseStream, state, testReducer} = useGlobalContext();
 
   const {title, artist, isPlaying} = state;
 
