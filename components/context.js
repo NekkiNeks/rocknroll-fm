@@ -47,7 +47,7 @@ export function AppProvider({children}) {
   function pauseStream() {
     const timeout = setTimeout(() => {
       dispatch({type: 'INIT_TOGGLE'});
-    }, 10000);
+    }, 30000);
     dispatch({type: 'ADD_TIMEOUT', payload: timeout});
     dispatch({type: 'PLAYER_TOGGLE'});
     TrackPlayer.pause();
