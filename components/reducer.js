@@ -4,17 +4,27 @@ function reducer(state, action) {
       console.log(action.payload);
       return state;
     }
+    case 'START_LOADING': {
+      return {...state, loading: true};
+    }
     case 'END_LOADING': {
       return {...state, loading: false};
     }
     case 'UPDATE_SONG': {
-      return {...state, trackInfo: action.payload};
+      const {title, artist} = action.payload;
+      return {...state, title, artist};
     }
-    case 'PLAYER_PLAY': {
-      return {...state, playerState: {isPlaying: true}};
+    case 'PLAYER_TOGGLE': {
+      return {...state, isPlaying: !state.isPlaying};
     }
-    case 'PLAYER_PAUSE': {
-      return {...state, playerState: {isPlaying: false}};
+    case 'INIT_TOGGLE': {
+      return {...state, init: !state.init};
+    }
+    case 'ADD_TIMEOUT': {
+      return {...state, timeout: action.payload};
+    }
+    case 'DELETE_TIMEOUT': {
+      return {...state, timeout: null};
     }
     default: {
       return state;

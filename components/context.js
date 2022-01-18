@@ -3,22 +3,22 @@ import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
-import trackdata from './trackInfo';
+import trackInfo from './trackInfo';
 import reducer from './reducer';
 
 const AppContext = React.createContext();
 
+const initialState = {
+  loading: false,
+  title: 'RNRFM',
+  artist: 'RNRFM',
+  isPlaying: false,
+  init: true,
+  timeout: null,
+};
+
 export function AppProvider({children}) {
-  const initialState = {
-    loading: true,
-    trackInfo: {
-      title: 'RNRFM',
-      artist: 'RNRFM',
-    },
-    playerState: {
-      isPlaying: false,
-    },
-  };
+  // Reducer setup
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -31,25 +31,42 @@ export function AppProvider({children}) {
   }
 
   async function playStream() {
-    await TrackPlayer.add([trackdata]);
-    dispatch({type: 'PLAYER_PLAY'});
-    TrackPlayer.play();
+    if (state.timeout) {
+      clearTimeout(state.timeout);
+      dispatch({type: 'DELETE_TIMEOUT'});
+    }
+    if (state.init) {
+      initPlayer();
+    } else {
+      await TrackPlayer.add([trackInfo]);
+      dispatch({type: 'PLAYER_TOGGLE'});
+      TrackPlayer.play();
+    }
   }
 
   function pauseStream() {
-    dispatch({type: 'PLAYER_PAUSE'});
+    const timeout = setTimeout(() => {
+      dispatch({type: 'INIT_TOGGLE'});
+    }, 10000);
+    dispatch({type: 'ADD_TIMEOUT', payload: timeout});
+    dispatch({type: 'PLAYER_TOGGLE'});
     TrackPlayer.pause();
   }
 
-  async function startPlayer() {
+  async function initPlayer() {
     try {
+      dispatch({type: 'START_LOADING'});
       await TrackPlayer.setupPlayer();
       dispatch({type: 'END_LOADING'});
+      await TrackPlayer.add([trackInfo]);
+      dispatch({type: 'PLAYER_TOGGLE'});
+      TrackPlayer.play();
+      dispatch({type: 'INIT_TOGGLE'});
     } catch (err) {
       console.log(err);
     }
   }
-
+  // handle events
   useTrackPlayerEvents([Event.PlaybackMetadataReceived], async e => {
     console.log('now playing:', e.artist, e.title);
     updateSong(e.title, e.artist);
@@ -61,7 +78,7 @@ export function AppProvider({children}) {
         state,
         testReducer,
         TrackPlayer,
-        startPlayer,
+        initPlayer,
         playStream,
         pauseStream,
       }}>

@@ -12,13 +12,12 @@ export function Player(style) {
     testReducer,
   } = useGlobalContext();
 
-  useEffect(() => {
-    startPlayer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   startPlayer();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  const {title, artist} = state.trackInfo;
-  const {isPlaying} = state.playerState;
+  const {title, artist, isPlaying} = state;
 
   if (state.loading) {
     return (
