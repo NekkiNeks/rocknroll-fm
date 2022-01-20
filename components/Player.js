@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useGlobalContext} from './context';
 
-export function Player(style) {
+export function Player() {
   const {playStream, pauseStream, state, testReducer} = useGlobalContext();
 
   const {title, artist, cover, isPlaying} = state;
@@ -21,6 +21,7 @@ export function Player(style) {
       </View>
     );
   }
+
   return (
     <View style={styles.container}>
       <Image source={{uri: cover}} style={styles.cover} />
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
   },
   cover: {
     alignSelf: 'stretch',
-    // width: 300,
     height: fullWidth,
   },
   title: {
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttons: {
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },

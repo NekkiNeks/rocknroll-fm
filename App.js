@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {View, Text} from 'react-native';
 
 //import components
 import {AppProvider} from './components/context';
@@ -10,8 +10,11 @@ import {Player} from './components/Player';
 function App() {
   return (
     <AppProvider>
-      <Text>this is RNR App</Text>
-      <Player />
+      <View style={{backgroundColor: '#eee'}}>
+        <Text>Header will be here</Text>
+        <Player />
+        <Text>Buttons will be here</Text>
+      </View>
     </AppProvider>
   );
 }
