@@ -11,8 +11,8 @@ function reducer(state, action) {
       return {...state, loading: false};
     }
     case 'UPDATE_SONG': {
-      const {title, artist} = action.payload;
-      return {...state, title, artist};
+      const {title, artist, cover} = action.payload;
+      return {...state, title, artist, cover};
     }
     case 'PLAYER_TOGGLE': {
       return {...state, isPlaying: !state.isPlaying};

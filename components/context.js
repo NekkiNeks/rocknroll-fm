@@ -12,6 +12,7 @@ const initialState = {
   loading: false,
   title: 'RNRFM',
   artist: 'RNRFM',
+  cover: 'null',
   isPlaying: false,
   init: true,
   timeout: null,
@@ -26,8 +27,21 @@ export function AppProvider({children}) {
     dispatch({type: 'TEST', payload: 'TESTING NEW FEATURE'});
   }
 
-  function updateSong(title, artist) {
-    dispatch({type: 'UPDATE_SONG', payload: {title, artist}});
+  async function getCoverUrl(artist, title) {
+    const url = `http://10.0.2.2:6666/covers?artist=${encodeURIComponent(
+      artist,
+    )}&title=${encodeURIComponent(title)}`;
+    return fetch(url, {method: 'get'})
+      .then(res => res.json())
+      .then(res => res.data)
+      .catch(err =>
+        console.log('cant connect to covers server: ', err.message),
+      );
+  }
+
+  async function updateSong(title, artist) {
+    const cover = await getCoverUrl(artist, title);
+    dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover}});
   }
 
   async function playStream() {

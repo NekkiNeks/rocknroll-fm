@@ -1,11 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
+import {Image, TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import {useGlobalContext} from './context';
 
 export function Player(style) {
   const {playStream, pauseStream, state, testReducer} = useGlobalContext();
 
-  const {title, artist, isPlaying} = state;
+  const {title, artist, cover, isPlaying} = state;
 
   if (state.loading) {
     return (
@@ -15,7 +15,8 @@ export function Player(style) {
     );
   }
   return (
-    <View style={style}>
+    <View style={styles.container}>
+      <Image source={{uri: cover}} style={styles.cover} />
       <Text style={styles.title}>Song name: {title}</Text>
       <Text style={styles.artist}>Artist: {artist}</Text>
       <View style={styles.buttons}>
@@ -42,6 +43,13 @@ export function Player(style) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
+  cover: {
+    width: 300,
+    height: 300,
+  },
   title: {
     fontSize: 18,
     textAlign: 'center',
