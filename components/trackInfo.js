@@ -1,5 +1,5 @@
 const track = {
-  url: 'http://manager6.streamradio.fr:2670/stream', // Load media from the network
+  url: 'https://a6.radioheart.ru:9046/RH1972', // Load media from the network
   title: 'RNRSTREAM',
   artist: 'deadmau5',
   album: 'while(1<2)',

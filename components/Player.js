@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, TouchableOpacity, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {useGlobalContext} from './context';
 
 export function Player(style) {
@@ -42,13 +49,16 @@ export function Player(style) {
   );
 }
 
+const fullWidth = Dimensions.get('window').width; //full width
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },
   cover: {
-    width: 300,
-    height: 300,
+    alignSelf: 'stretch',
+    // width: 300,
+    height: fullWidth,
   },
   title: {
     fontSize: 18,

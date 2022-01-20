@@ -27,20 +27,22 @@ export function AppProvider({children}) {
     dispatch({type: 'TEST', payload: 'TESTING NEW FEATURE'});
   }
 
-  async function getCoverUrl(artist, title) {
-    const url = `http://10.0.2.2:6666/covers?artist=${encodeURIComponent(
-      artist,
-    )}&title=${encodeURIComponent(title)}`;
-    return fetch(url, {method: 'get'})
-      .then(res => res.json())
-      .then(res => res.data)
-      .catch(err =>
-        console.log('cant connect to covers server: ', err.message),
-      );
+  async function getImageFromRadioHeart(artist, title) {
+    let responce = await fetch(
+      `https://image-fetcher.radioheart.ru/api/get-image?artist=${encodeURIComponent(
+        artist,
+      )}&title=${encodeURIComponent(title)}`,
+    );
+    responce = await responce.json();
+    if (responce.status === 'ok') {
+      return responce.image;
+    }
+    return null;
   }
 
-  async function updateSong(title, artist) {
-    const cover = await getCoverUrl(artist, title);
+  async function updateSong(artist, title) {
+    const cover = await getImageFromRadioHeart(artist, title);
+    console.log(cover);
     dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover}});
   }
 
@@ -83,7 +85,7 @@ export function AppProvider({children}) {
   // handle events
   useTrackPlayerEvents([Event.PlaybackMetadataReceived], async e => {
     console.log('now playing:', e.artist, e.title);
-    updateSong(e.title, e.artist);
+    updateSong(e.artist, e.title);
   });
 
   return (
