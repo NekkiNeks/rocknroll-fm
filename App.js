@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {StyleSheet, View, Text, Dimensions} from 'react-native';
 
 //import components
 import {AppProvider} from './components/context';
@@ -10,7 +10,7 @@ import {Player} from './components/Player';
 function App() {
   return (
     <AppProvider>
-      <View style={{backgroundColor: '#eee'}}>
+      <View style={styles.mainContainer}>
         <Text>Header will be here</Text>
         <Player />
         <Text>Buttons will be here</Text>
@@ -21,6 +21,13 @@ function App() {
 
 console.log('everything works!');
 
-// const styles = StyleSheet.create({});
+const fullHeight = Dimensions.get('window').height;
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: '#eee',
+    height: fullHeight,
+  },
+});
 
 export default App;
