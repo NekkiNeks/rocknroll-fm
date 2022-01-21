@@ -77,7 +77,6 @@ export function AppProvider({children}) {
       await TrackPlayer.setupPlayer();
       dispatch({type: 'END_LOADING'});
       await TrackPlayer.add([trackInfo]);
-
       dispatch({type: 'PLAYER_TOGGLE'});
       TrackPlayer.play();
       dispatch({type: 'INIT_TOGGLE'});
