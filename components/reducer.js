@@ -26,6 +26,13 @@ function reducer(state, action) {
     case 'DELETE_TIMEOUT': {
       return {...state, timeout: null};
     }
+    case 'TURN_OFF_INIT_METADATA': {
+      return {...state, initMetadata: false};
+    }
+    case 'TURN_ON_INIT_METADATA': {
+      return {...state, initMetadata: true};
+    }
+
     default: {
       return state;
     }

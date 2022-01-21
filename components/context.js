@@ -16,6 +16,7 @@ const initialState = {
   isPlaying: false,
   init: true,
   timeout: null,
+  initMetadata: true,
 };
 
 export function AppProvider({children}) {
@@ -63,6 +64,7 @@ export function AppProvider({children}) {
   function pauseStream() {
     const timeout = setTimeout(() => {
       dispatch({type: 'INIT_TOGGLE'});
+      dispatch({type: 'TURN_ON_INIT_METADATA'});
     }, 30000);
     dispatch({type: 'ADD_TIMEOUT', payload: timeout});
     dispatch({type: 'PLAYER_TOGGLE'});
@@ -75,6 +77,7 @@ export function AppProvider({children}) {
       await TrackPlayer.setupPlayer();
       dispatch({type: 'END_LOADING'});
       await TrackPlayer.add([trackInfo]);
+
       dispatch({type: 'PLAYER_TOGGLE'});
       TrackPlayer.play();
       dispatch({type: 'INIT_TOGGLE'});
@@ -85,7 +88,16 @@ export function AppProvider({children}) {
   // handle events
   useTrackPlayerEvents([Event.PlaybackMetadataReceived], async e => {
     console.log('now playing:', e.artist, e.title);
-    updateSong(e.artist, e.title);
+    if (state.initMetadata) {
+      if (e.artist === null) {
+        console.log('throwing');
+      } else {
+        updateSong(e.artist, e.title);
+      }
+      dispatch({type: 'TURN_OFF_INIT_METADATA'});
+    } else {
+      updateSong(e.artist, e.title);
+    }
   });
 
   return (
