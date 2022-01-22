@@ -44,6 +44,12 @@ export function AppProvider({children}) {
   async function updateSong(artist, title) {
     const cover = await getImageFromRadioHeart(artist, title);
     console.log(cover);
+    await TrackPlayer.updateMetadataForTrack(0, {
+      ...trackInfo,
+      title,
+      artist,
+      artwork: cover,
+    });
     dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover}});
   }
 
