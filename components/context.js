@@ -75,6 +75,10 @@ export function AppProvider({children}) {
     try {
       dispatch({type: 'START_LOADING'});
       await TrackPlayer.setupPlayer();
+      // stop player on closing app
+      TrackPlayer.updateOptions({
+        stopWithApp: true,
+      });
       dispatch({type: 'END_LOADING'});
       await TrackPlayer.add([trackInfo]);
       dispatch({type: 'PLAYER_TOGGLE'});
