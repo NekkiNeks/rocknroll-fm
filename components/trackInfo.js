@@ -1,7 +1,7 @@
 const track = {
   url: 'https://a6.radioheart.ru:9046/RH1972', // Load media from the network
-  title: `Rock'n'Roll FM`,
-  artist: 'deadmau5',
+  title: 'RNRFM',
+  artist: 'RNRFM',
   album: 'listening stream',
   genre: 'Progressive House, Electro House',
   date: '2014-05-20T07:00:00+00:00', // RFC 3339

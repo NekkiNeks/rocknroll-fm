@@ -14,6 +14,8 @@ export function Player() {
 
   const {title, artist, cover, isPlaying} = state;
 
+  // cover = cover ? {uri: cover} : require('../assets/logo.jpg');
+
   if (state.loading) {
     return (
       <View>
@@ -24,7 +26,15 @@ export function Player() {
 
   return (
     <View style={styles.container}>
-      <Image source={{uri: cover}} style={styles.cover} />
+      {cover ? (
+        <Image source={{uri: cover}} style={styles.cover} />
+      ) : (
+        <Image
+          source={require('../assets/logo.jpg')}
+          style={styles.coverPlaceholder}
+        />
+      )}
+      {/* <Image source={cover} style={styles.cover} /> */}
       <Text style={styles.title}>Song name: {title}</Text>
       <Text style={styles.artist}>Artist: {artist}</Text>
       <View style={styles.buttons}>
@@ -59,6 +69,12 @@ const styles = StyleSheet.create({
   cover: {
     alignSelf: 'stretch',
     height: fullWidth,
+    // resizeMode: 'contain',
+  },
+  coverPlaceholder: {
+    // alignSelf: 'stretch',
+    height: fullWidth,
+    resizeMode: 'contain',
   },
   title: {
     fontSize: 18,

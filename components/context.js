@@ -2,6 +2,7 @@ import React, {useContext, useReducer} from 'react';
 import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
+  Capability,
 } from 'react-native-track-player';
 import trackInfo from './trackInfo';
 import reducer from './reducer';
@@ -42,13 +43,17 @@ export function AppProvider({children}) {
   }
 
   async function updateSong(artist, title) {
-    const cover = await getImageFromRadioHeart(artist, title);
+    let cover = await getImageFromRadioHeart(artist, title);
     console.log(cover);
+    if (!cover) {
+      console.log('there is no cover');
+      // cover = require('../assets/logo.jpg');
+    }
     await TrackPlayer.updateMetadataForTrack(0, {
       ...trackInfo,
       title,
       artist,
-      artwork: cover,
+      artwork: cover ? cover : require('../assets/logo.jpg'),
     });
     dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover}});
   }
@@ -81,9 +86,13 @@ export function AppProvider({children}) {
     try {
       dispatch({type: 'START_LOADING'});
       await TrackPlayer.setupPlayer();
-      // stop player on closing app
-      TrackPlayer.updateOptions({
+      // Player options
+      await TrackPlayer.updateOptions({
         stopWithApp: true,
+        capabilities: [Capability.Play, Capability.Pause],
+
+        // Capabilities in the compact form on Android
+        compactCapabilities: [Capability.Play, Capability.Pause],
       });
       dispatch({type: 'END_LOADING'});
       await TrackPlayer.add([trackInfo]);
@@ -107,6 +116,16 @@ export function AppProvider({children}) {
     } else {
       updateSong(e.artist, e.title);
     }
+  });
+
+  useTrackPlayerEvents([Event.RemotePlay], async e => {
+    console.log('event remote-play fired!');
+    playStream();
+  });
+
+  useTrackPlayerEvents([Event.RemotePause], async e => {
+    console.log('event remote-pause fired!');
+    pauseStream();
   });
 
   return (
