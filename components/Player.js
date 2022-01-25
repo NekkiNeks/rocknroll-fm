@@ -29,14 +29,11 @@ export function Player() {
       {cover ? (
         <Image source={{uri: cover}} style={styles.cover} />
       ) : (
-        <Image
-          source={require('../assets/logo.jpg')}
-          style={styles.coverPlaceholder}
-        />
+        <Image source={require('../assets/logo.jpg')} style={styles.cover} />
       )}
       {/* <Image source={cover} style={styles.cover} /> */}
-      <Text style={styles.title}>Song name: {title}</Text>
-      <Text style={styles.artist}>Artist: {artist}</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.artist}>{artist}</Text>
       <View style={styles.buttons}>
         <TouchableOpacity
           onPress={() => {
@@ -46,51 +43,51 @@ export function Player() {
             return pauseStream();
           }}
           title={'play'}>
-          <Text>{isPlaying ? 'pause' : 'play'}</Text>
+          <Text style={styles.buttonText}>{isPlaying ? 'pause' : 'play'}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             testReducer();
             console.log(state);
           }}>
-          <Text>TEST REDUCER</Text>
+          <Text style={styles.buttonText}>TEST REDUCER</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-const fullWidth = Dimensions.get('window').width; //full width
+const fullWidth = Dimensions.get('window').width - 50; //full width
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    backgroundColor: '#111',
+    flexGrow: 1,
   },
   cover: {
-    alignSelf: 'stretch',
-    height: fullWidth,
-    // resizeMode: 'contain',
-  },
-  coverPlaceholder: {
-    // alignSelf: 'stretch',
+    width: fullWidth,
     height: fullWidth,
     resizeMode: 'contain',
+    marginBottom: 20,
   },
   title: {
-    fontSize: 18,
+    color: '#fff',
+    fontSize: 17,
     textAlign: 'center',
   },
   artist: {
-    fontSize: 15,
+    color: '#fff',
+    fontSize: 14,
     textAlign: 'center',
   },
   buttons: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  button: {
-    backgroundColor: 'tomato',
-    textAlign: 'center',
-    width: 50,
+  buttonText: {
+    color: '#fff',
+    // textAlign: 'center',
+    // width: 50,
   },
 });
