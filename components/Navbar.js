@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Dimensions,
   View,
-  Image,
   Text,
   StyleSheet,
   TouchableOpacity,
@@ -10,19 +9,32 @@ import {
 
 export default function Navbar() {
   return (
-    <View style={style.container}>
-      <Text>Navbar</Text>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.button}>
+        <Text>Button 1</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button}>
+        <Text>Button 2</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button}>
+        <Text>Button 3</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const maxHeight = Dimensions.get('window').height;
-const containerHeight = (maxHeight * 10) / 100;
+const containerHeight = (maxHeight * 8) / 100;
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: containerHeight,
     flexDirection: 'row',
     backgroundColor: 'tomato',
+  },
+  button: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

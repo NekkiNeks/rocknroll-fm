@@ -14,11 +14,9 @@ export function Player() {
 
   const {title, artist, cover, isPlaying} = state;
 
-  // cover = cover ? {uri: cover} : require('../assets/logo.jpg');
-
   if (state.loading) {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Loading...</Text>
       </View>
     );
@@ -31,7 +29,6 @@ export function Player() {
       ) : (
         <Image source={require('../assets/logo.jpg')} style={styles.cover} />
       )}
-      {/* <Image source={cover} style={styles.cover} /> */}
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.artist}>{artist}</Text>
       <View style={styles.buttons}>
@@ -57,17 +54,18 @@ export function Player() {
   );
 }
 
-const fullWidth = Dimensions.get('window').width - 50; //full width
+const fullWidth = Dimensions.get('window').width; //full width
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: '#111',
     flexGrow: 1,
   },
   cover: {
-    width: fullWidth,
-    height: fullWidth,
+    width: fullWidth - 50,
+    height: fullWidth - 50,
     resizeMode: 'contain',
     marginBottom: 20,
   },
@@ -87,7 +85,5 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    // textAlign: 'center',
-    // width: 50,
   },
 });

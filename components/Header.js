@@ -10,16 +10,19 @@ import {
 
 export default function Header() {
   return (
-    <View style={style.container}>
-      <TouchableOpacity style={style.link}>
-        <Image source={require('../assets/logo.jpg')} style={style.logoImage} />
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.link}>
+        <Image
+          source={require('../assets/logo.jpg')}
+          style={styles.logoImage}
+        />
       </TouchableOpacity>
-      <View style={style.textContainer}>
-        <Text style={style.text}>ПЕРВОЕ {'\n'} МУЖСКОЕ РАДИО</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>ПЕРВОЕ {'\n'} МУЖСКОЕ РАДИО</Text>
       </View>
       <View>
-        <TouchableOpacity style={style.link}>
-          <Text style={{color: '#eee'}}>RNR</Text>
+        <TouchableOpacity style={styles.link}>
+          <Text style={{color: '#eee'}}>Share</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -27,21 +30,21 @@ export default function Header() {
 }
 
 const maxHeight = Dimensions.get('window').height;
-const containerHeight = (maxHeight * 10) / 100;
+const containerHeight = (maxHeight * 8) / 100;
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: containerHeight,
     flexDirection: 'row',
     backgroundColor: '#000',
   },
   logoImage: {
-    width: containerHeight - 20,
-    height: containerHeight - 20,
+    width: containerHeight - 13,
+    height: containerHeight - 13,
   },
   text: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 14,
     color: 'rgba(255, 255, 255, 0.3)',
   },
   textContainer: {
