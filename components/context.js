@@ -11,9 +11,9 @@ const AppContext = React.createContext();
 
 const initialState = {
   loading: false,
-  title: 'RNRFM',
-  artist: 'RNRFM',
-  cover: 'null',
+  title: null,
+  artist: null,
+  cover: null,
   isPlaying: false,
   init: true,
   timeout: null,
@@ -47,7 +47,6 @@ export function AppProvider({children}) {
     console.log(cover);
     if (!cover) {
       console.log('there is no cover');
-      // cover = require('../assets/logo.jpg');
     }
     await TrackPlayer.updateMetadataForTrack(0, {
       ...trackInfo,
@@ -67,18 +66,18 @@ export function AppProvider({children}) {
       initPlayer();
     } else {
       await TrackPlayer.add([trackInfo]);
-      dispatch({type: 'PLAYER_TOGGLE'});
+      dispatch({type: 'PLAYER_TOGGLE', payload: true});
       TrackPlayer.play();
     }
   }
 
   function pauseStream() {
     const timeout = setTimeout(() => {
-      dispatch({type: 'INIT_TOGGLE'});
+      dispatch({type: 'INIT_TOGGLE', payload: true});
       dispatch({type: 'TURN_ON_INIT_METADATA'});
     }, 30000);
     dispatch({type: 'ADD_TIMEOUT', payload: timeout});
-    dispatch({type: 'PLAYER_TOGGLE'});
+    dispatch({type: 'PLAYER_TOGGLE', payload: false});
     TrackPlayer.pause();
   }
 
@@ -90,15 +89,13 @@ export function AppProvider({children}) {
       await TrackPlayer.updateOptions({
         stopWithApp: true,
         capabilities: [Capability.Play, Capability.Pause],
-
-        // Capabilities in the compact form on Android
         compactCapabilities: [Capability.Play, Capability.Pause],
       });
       dispatch({type: 'END_LOADING'});
       await TrackPlayer.add([trackInfo]);
-      dispatch({type: 'PLAYER_TOGGLE'});
+      dispatch({type: 'PLAYER_TOGGLE', payload: true});
       TrackPlayer.play();
-      dispatch({type: 'INIT_TOGGLE'});
+      dispatch({type: 'INIT_TOGGLE', payload: false});
     } catch (err) {
       console.log(err);
     }

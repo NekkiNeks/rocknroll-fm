@@ -15,10 +15,10 @@ function reducer(state, action) {
       return {...state, title, artist, cover};
     }
     case 'PLAYER_TOGGLE': {
-      return {...state, isPlaying: !state.isPlaying};
+      return {...state, isPlaying: action.payload};
     }
     case 'INIT_TOGGLE': {
-      return {...state, init: !state.init};
+      return {...state, init: action.payload};
     }
     case 'ADD_TIMEOUT': {
       return {...state, timeout: action.payload};
