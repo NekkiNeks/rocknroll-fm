@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Header() {
   const {state} = useGlobalContext();
@@ -30,7 +31,8 @@ export default function Header() {
       </View>
       <View>
         <TouchableOpacity style={styles.link}>
-          <Text style={{color: '#eee'}}>Share</Text>
+          <Icon name={'share'} size={25} color={'#fff'} />
+          {/* <Text style={{color: '#eee'}}>Share</Text> */}
         </TouchableOpacity>
       </View>
     </View>
