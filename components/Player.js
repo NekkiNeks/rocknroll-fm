@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#111',
+    backgroundColor: '#000',
     flexGrow: 1,
   },
   imageContainer: {

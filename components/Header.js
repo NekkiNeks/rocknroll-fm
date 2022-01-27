@@ -1,4 +1,5 @@
 import React from 'react';
+import {useGlobalContext} from './context';
 import {
   Dimensions,
   View,
@@ -9,16 +10,23 @@ import {
 } from 'react-native';
 
 export default function Header() {
+  const {state} = useGlobalContext();
+  const {firstPlay} = state;
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.link}>
-        <Image
-          source={require('../assets/logo.jpg')}
-          style={styles.logoImage}
-        />
+        {!firstPlay && (
+          <Image
+            source={require('../assets/logo.jpg')}
+            style={styles.logoImage}
+          />
+        )}
       </TouchableOpacity>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>ПЕРВОЕ {'\n'} МУЖСКОЕ РАДИО</Text>
+        {!firstPlay && (
+          <Text style={styles.text}>ПЕРВОЕ {'\n'} МУЖСКОЕ РАДИО</Text>
+        )}
       </View>
       <View>
         <TouchableOpacity style={styles.link}>
