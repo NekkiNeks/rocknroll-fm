@@ -32,6 +32,9 @@ function reducer(state, action) {
     case 'TURN_ON_INIT_METADATA': {
       return {...state, initMetadata: true};
     }
+    case 'TURN_OFF_FIRST_PLAY': {
+      return {...state, firstPlay: false};
+    }
 
     default: {
       return state;

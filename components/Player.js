@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -10,9 +10,16 @@ import {
 import {useGlobalContext} from './context';
 
 export function Player() {
-  const {playStream, pauseStream, state, testReducer} = useGlobalContext();
+  const {playStream, pauseStream, state} = useGlobalContext();
 
-  const {title, artist, cover, isPlaying} = state;
+  const {title, artist, cover, isPlaying, firstPlay} = state;
+
+  const [infoHeight, setInfoHeight] = useState(0);
+
+  function getInfoHeight(e) {
+    const {height} = e.nativeEvent.layout;
+    setInfoHeight(height);
+  }
 
   if (state.loading) {
     return (
@@ -24,30 +31,40 @@ export function Player() {
 
   return (
     <View style={styles.container}>
-      {cover ? (
-        <Image source={{uri: cover}} style={styles.cover} />
-      ) : (
-        <Image source={require('../assets/logo.jpg')} style={styles.cover} />
+      {/* Image container */}
+      <View style={styles.imageContainer}>
+        {cover ? (
+          <Image source={{uri: cover}} style={styles.cover} />
+        ) : (
+          <Image source={require('../assets/logo.jpg')} style={styles.cover} />
+        )}
+      </View>
+
+      {/* info container */}
+      {!firstPlay && (
+        <View style={styles.infoContainer} onLayout={getInfoHeight}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.artist}>{artist}</Text>
+          {title && artist && (
+            <TouchableOpacity
+              onPress={() => console.log('searching')}
+              style={[styles.searchButton, {height: infoHeight}]}>
+              <Text style={{color: '#fff'}}>search</Text>
+            </TouchableOpacity>
+          )}
+        </View>
       )}
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.artist}>{artist}</Text>
-      <View style={styles.buttons}>
+
+      {/* buttons container */}
+      <View style={styles.buttonsContainer}>
         <TouchableOpacity
           onPress={() => {
             if (!isPlaying) {
               return playStream();
             }
             return pauseStream();
-          }}
-          title={'play'}>
-          <Text style={styles.buttonText}>{isPlaying ? 'pause' : 'play'}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            testReducer();
-            console.log(state);
           }}>
-          <Text style={styles.buttonText}>TEST REDUCER</Text>
+          <Text style={styles.buttonText}>{isPlaying ? 'pause' : 'play'}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -55,6 +72,7 @@ export function Player() {
 }
 
 const fullWidth = Dimensions.get('window').width; //full width
+const croppedWidth = fullWidth - 50;
 
 const styles = StyleSheet.create({
   container: {
@@ -63,11 +81,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#111',
     flexGrow: 1,
   },
+  imageContainer: {
+    height: croppedWidth,
+  },
   cover: {
-    width: fullWidth - 50,
-    height: fullWidth - 50,
-    resizeMode: 'contain',
+    // flex: 1,
+    width: croppedWidth,
+    height: croppedWidth,
+    resizeMode: 'cover',
     marginBottom: 20,
+  },
+  infoContainer: {
+    width: croppedWidth,
+    marginTop: 20,
   },
   title: {
     color: '#fff',
@@ -79,7 +105,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
-  buttons: {
+  searchButton: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonsContainer: {
+    flexGrow: 1,
+    width: fullWidth,
     alignItems: 'center',
     justifyContent: 'center',
   },

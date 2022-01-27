@@ -10,6 +10,7 @@ import reducer from './reducer';
 const AppContext = React.createContext();
 
 const initialState = {
+  firstPlay: true,
   loading: false,
   title: null,
   artist: null,
@@ -69,6 +70,7 @@ export function AppProvider({children}) {
       dispatch({type: 'PLAYER_TOGGLE', payload: true});
       TrackPlayer.play();
     }
+    dispatch({type: 'TURN_OFF_FIRST_PLAY'});
   }
 
   function pauseStream() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Dimensions} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 //import components
 import {AppProvider} from './components/context';
@@ -23,12 +23,10 @@ function App() {
 
 console.log('everything works!');
 
-const fullHeight = Dimensions.get('window').height - 24; // remove that!
-
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: '#000',
-    height: fullHeight,
+    height: '100%',
   },
 });
 
