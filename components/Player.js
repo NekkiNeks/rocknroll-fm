@@ -7,6 +7,8 @@ import {
   Text,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import {useGlobalContext} from './context';
 
 export function Player() {
@@ -49,7 +51,7 @@ export function Player() {
             <TouchableOpacity
               onPress={() => console.log('searching')}
               style={[styles.searchButton, {height: infoHeight}]}>
-              <Text style={{color: '#fff'}}>search</Text>
+              <Icon name={'search'} size={25} color={'#fff'} />
             </TouchableOpacity>
           )}
         </View>
@@ -64,7 +66,15 @@ export function Player() {
             }
             return pauseStream();
           }}>
-          <Text style={styles.buttonText}>{isPlaying ? 'pause' : 'play'}</Text>
+          {!isPlaying ? (
+            <Icon
+              name={'play-arrow'}
+              size={firstPlay ? 120 : 60}
+              color={'#fff'}
+            />
+          ) : (
+            <Icon name={'pause'} size={60} color={'#fff'} />
+          )}
         </TouchableOpacity>
       </View>
     </View>

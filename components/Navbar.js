@@ -1,23 +1,18 @@
 import React from 'react';
-import {
-  Dimensions,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {Dimensions, View, StyleSheet, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Navbar() {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button}>
-        <Text>Button 1</Text>
+        <Icon name={'menu'} size={40} color={'#4d4d4d'} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>
-        <Text>Button 2</Text>
+        <Icon name={'radio'} size={35} color={'#eb7209'} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>
-        <Text>Button 3</Text>
+        <Icon name={'queue-music'} size={45} color={'#4d4d4d'} />
       </TouchableOpacity>
     </View>
   );
@@ -30,7 +25,7 @@ const styles = StyleSheet.create({
   container: {
     height: containerHeight,
     flexDirection: 'row',
-    backgroundColor: 'tomato',
+    // backgroundColor: 'tomato',
   },
   button: {
     flexGrow: 1,
