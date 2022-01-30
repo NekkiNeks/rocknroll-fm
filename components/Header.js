@@ -32,7 +32,6 @@ export default function Header() {
       <View>
         <TouchableOpacity style={styles.link}>
           <Icon name={'share'} size={25} color={'#fff'} />
-          {/* <Text style={{color: '#eee'}}>Share</Text> */}
         </TouchableOpacity>
       </View>
     </View>

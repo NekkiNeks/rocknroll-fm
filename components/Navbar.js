@@ -3,7 +3,7 @@ import {Dimensions, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useGlobalContext} from './context';
 
-export default function Navbar() {
+export default function Navbar({state, descriptors, navigation}) {
   const {toggleMenu} = useGlobalContext();
 
   return (
@@ -11,10 +11,14 @@ export default function Navbar() {
       <TouchableOpacity style={styles.button} onPress={() => toggleMenu(true)}>
         <Icon name={'menu'} size={40} color={'#4d4d4d'} />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Player')}>
         <Icon name={'radio'} size={35} color={'#eb7209'} />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('List')}>
         <Icon name={'queue-music'} size={45} color={'#4d4d4d'} />
       </TouchableOpacity>
     </View>
