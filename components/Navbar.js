@@ -1,11 +1,14 @@
 import React from 'react';
 import {Dimensions, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useGlobalContext} from './context';
 
 export default function Navbar() {
+  const {toggleMenu} = useGlobalContext();
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => toggleMenu(true)}>
         <Icon name={'menu'} size={40} color={'#4d4d4d'} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>
@@ -25,7 +28,6 @@ const styles = StyleSheet.create({
   container: {
     height: containerHeight,
     flexDirection: 'row',
-    // backgroundColor: 'tomato',
   },
   button: {
     flexGrow: 1,

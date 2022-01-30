@@ -19,6 +19,7 @@ const initialState = {
   init: true,
   timeout: null,
   initMetadata: true,
+  showMenu: false,
 };
 
 export function AppProvider({children}) {
@@ -102,6 +103,11 @@ export function AppProvider({children}) {
       console.log(err);
     }
   }
+
+  function toggleMenu(value) {
+    dispatch({type: 'TOGGLE_MENU', payload: value});
+  }
+
   // handle events
   useTrackPlayerEvents([Event.PlaybackMetadataReceived], async e => {
     console.log('now playing:', e.artist, e.title);
@@ -136,6 +142,7 @@ export function AppProvider({children}) {
         initPlayer,
         playStream,
         pauseStream,
+        toggleMenu,
       }}>
       {children}
     </AppContext.Provider>

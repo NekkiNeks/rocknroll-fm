@@ -35,6 +35,9 @@ function reducer(state, action) {
     case 'TURN_OFF_FIRST_PLAY': {
       return {...state, firstPlay: false};
     }
+    case 'TOGGLE_MENU': {
+      return {...state, showMenu: action.payload};
+    }
 
     default: {
       return state;
