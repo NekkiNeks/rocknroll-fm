@@ -82,7 +82,7 @@ export function Player() {
 }
 
 const fullWidth = Dimensions.get('window').width; //full width
-const croppedWidth = fullWidth - 50;
+const croppedWidth = fullWidth;
 
 const styles = StyleSheet.create({
   container: {
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
   },
   searchButton: {
     position: 'absolute',
+    paddingRight: 20,
     right: 0,
     bottom: 0,
     justifyContent: 'center',

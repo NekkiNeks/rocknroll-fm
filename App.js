@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, SafeAreaView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 //import components
 import {AppProvider} from './components/context';
@@ -15,7 +14,6 @@ import List from './components/List';
 //code
 function App() {
   const Tab = createBottomTabNavigator();
-  const Stack = createNativeStackNavigator();
 
   return (
     <AppProvider>

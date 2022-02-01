@@ -40,7 +40,11 @@ export default function Menu() {
         styles.container,
         [
           {
-            translateY: translation,
+            transform: [
+              {
+                translateY: translation,
+              },
+            ],
             bottom: menuHeight ? -menuHeight : -100,
           },
         ],

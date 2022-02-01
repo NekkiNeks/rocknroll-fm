@@ -12,7 +12,7 @@ const AppContext = React.createContext();
 const initialState = {
   firstPlay: true,
   loading: false,
-  title: null,
+  title: `Rock'n'Roll FM`,
   artist: null,
   cover: null,
   isPlaying: false,
@@ -87,7 +87,11 @@ export function AppProvider({children}) {
   async function initPlayer() {
     try {
       dispatch({type: 'START_LOADING'});
-      await TrackPlayer.setupPlayer();
+      await TrackPlayer.reset();
+      await TrackPlayer.setupPlayer({
+        waitForBuffer: true,
+        playBuffer: 0.5,
+      });
       // Player options
       await TrackPlayer.updateOptions({
         stopWithApp: true,
@@ -126,6 +130,11 @@ export function AppProvider({children}) {
   useTrackPlayerEvents([Event.RemotePlay], async e => {
     console.log('event remote-play fired!');
     playStream();
+  });
+
+  useTrackPlayerEvents([Event.PlaybackState], async e => {
+    const playerState = await TrackPlayer.getState();
+    console.log('player state: ', playerState);
   });
 
   useTrackPlayerEvents([Event.RemotePause], async e => {
