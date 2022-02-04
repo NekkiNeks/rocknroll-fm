@@ -4,12 +4,6 @@ function reducer(state, action) {
       console.log(action.payload);
       return state;
     }
-    case 'START_LOADING': {
-      return {...state, loading: true};
-    }
-    case 'END_LOADING': {
-      return {...state, loading: false};
-    }
     case 'UPDATE_SONG': {
       const {title, artist, cover} = action.payload;
       return {...state, title, artist, cover};
@@ -26,8 +20,8 @@ function reducer(state, action) {
     case 'DELETE_TIMEOUT': {
       return {...state, timeout: null};
     }
-    case 'TURN_OFF_INIT_METADATA': {
-      return {...state, initMetadata: false};
+    case 'TOGGLE_INIT_METADATA': {
+      return {...state, initMetadata: action.payload};
     }
     case 'TURN_ON_INIT_METADATA': {
       return {...state, initMetadata: true};
@@ -40,6 +34,7 @@ function reducer(state, action) {
     }
 
     default: {
+      console.log(state);
       return state;
     }
   }

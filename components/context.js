@@ -1,9 +1,10 @@
-import React, {useContext, useReducer} from 'react';
+import React, {useContext, useEffect, useReducer} from 'react';
 import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
   Capability,
 } from 'react-native-track-player';
+import getImageFromRadioHeart from '../functions/getImageFromRadioHeart';
 import trackInfo from './trackInfo';
 import reducer from './reducer';
 
@@ -11,7 +12,6 @@ const AppContext = React.createContext();
 
 const initialState = {
   firstPlay: true,
-  loading: false,
   title: `Rock'n'Roll FM`,
   artist: null,
   cover: null,
@@ -23,30 +23,33 @@ const initialState = {
 };
 
 export function AppProvider({children}) {
+  async function setupPlayer() {
+    await TrackPlayer.setupPlayer({
+      waitForBuffer: true,
+      playBuffer: 0.5,
+    });
+    // Player options
+    await TrackPlayer.updateOptions({
+      stopWithApp: true,
+      capabilities: [Capability.Play, Capability.Pause],
+      compactCapabilities: [Capability.Play, Capability.Pause],
+    });
+  }
+  useEffect(() => {
+    setupPlayer().then(console.log('player is setuped'));
+  }, []);
   // Reducer setup
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function testReducer() {
-    dispatch({type: 'TEST', payload: 'TESTING NEW FEATURE'});
-  }
-
-  async function getImageFromRadioHeart(artist, title) {
-    let responce = await fetch(
-      `https://image-fetcher.radioheart.ru/api/get-image?artist=${encodeURIComponent(
-        artist,
-      )}&title=${encodeURIComponent(title)}`,
-    );
-    responce = await responce.json();
-    if (responce.status === 'ok') {
-      return responce.image;
-    }
-    return null;
+  async function testReducer() {
+    dispatch({});
+    const queue = await TrackPlayer.getQueue();
+    console.log(queue);
   }
 
   async function updateSong(artist, title) {
     let cover = await getImageFromRadioHeart(artist, title);
-    console.log(cover);
     if (!cover) {
       console.log('there is no cover');
     }
@@ -65,47 +68,23 @@ export function AppProvider({children}) {
       dispatch({type: 'DELETE_TIMEOUT'});
     }
     if (state.init) {
-      initPlayer();
-    } else {
+      await TrackPlayer.reset();
       await TrackPlayer.add([trackInfo]);
-      dispatch({type: 'PLAYER_TOGGLE', payload: true});
-      TrackPlayer.play();
+      dispatch({type: 'INIT_TOGGLE', payload: false});
     }
+    TrackPlayer.play();
+    dispatch({type: 'PLAYER_TOGGLE', payload: true});
     dispatch({type: 'TURN_OFF_FIRST_PLAY'});
   }
 
   function pauseStream() {
     const timeout = setTimeout(() => {
       dispatch({type: 'INIT_TOGGLE', payload: true});
-      dispatch({type: 'TURN_ON_INIT_METADATA'});
-    }, 30000);
+      dispatch({type: 'TOGGLE_INIT_METADATA', payload: true});
+    }, 10000);
     dispatch({type: 'ADD_TIMEOUT', payload: timeout});
     dispatch({type: 'PLAYER_TOGGLE', payload: false});
     TrackPlayer.pause();
-  }
-
-  async function initPlayer() {
-    try {
-      dispatch({type: 'START_LOADING'});
-      await TrackPlayer.reset();
-      await TrackPlayer.setupPlayer({
-        waitForBuffer: true,
-        playBuffer: 0.5,
-      });
-      // Player options
-      await TrackPlayer.updateOptions({
-        stopWithApp: true,
-        capabilities: [Capability.Play, Capability.Pause],
-        compactCapabilities: [Capability.Play, Capability.Pause],
-      });
-      dispatch({type: 'END_LOADING'});
-      await TrackPlayer.add([trackInfo]);
-      dispatch({type: 'PLAYER_TOGGLE', payload: true});
-      TrackPlayer.play();
-      dispatch({type: 'INIT_TOGGLE', payload: false});
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   function toggleMenu(value) {
@@ -121,7 +100,7 @@ export function AppProvider({children}) {
       } else {
         updateSong(e.artist, e.title);
       }
-      dispatch({type: 'TURN_OFF_INIT_METADATA'});
+      dispatch({type: 'TOGGLE_INIT_METADATA', payload: false});
     } else {
       updateSong(e.artist, e.title);
     }
@@ -132,14 +111,14 @@ export function AppProvider({children}) {
     playStream();
   });
 
-  useTrackPlayerEvents([Event.PlaybackState], async e => {
-    const playerState = await TrackPlayer.getState();
-    console.log('player state: ', playerState);
-  });
-
   useTrackPlayerEvents([Event.RemotePause], async e => {
     console.log('event remote-pause fired!');
     pauseStream();
+  });
+
+  useTrackPlayerEvents([Event.PlaybackState], async e => {
+    const playerState = await TrackPlayer.getState();
+    console.log('player state: ', playerState);
   });
 
   return (
@@ -148,7 +127,6 @@ export function AppProvider({children}) {
         state,
         testReducer,
         TrackPlayer,
-        initPlayer,
         playStream,
         pauseStream,
         toggleMenu,

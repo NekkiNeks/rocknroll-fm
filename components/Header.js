@@ -11,7 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Header() {
-  const {state} = useGlobalContext();
+  const {state, testReducer} = useGlobalContext();
   const {firstPlay} = state;
 
   return (
@@ -30,7 +30,7 @@ export default function Header() {
         )}
       </View>
       <View>
-        <TouchableOpacity style={styles.link}>
+        <TouchableOpacity style={styles.link} onPress={testReducer}>
           <Icon name={'share'} size={25} color={'#fff'} />
         </TouchableOpacity>
       </View>
