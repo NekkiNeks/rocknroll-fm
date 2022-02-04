@@ -23,6 +23,7 @@ const initialState = {
 };
 
 export function AppProvider({children}) {
+  //Setup Player Here:
   async function setupPlayer() {
     await TrackPlayer.setupPlayer({
       waitForBuffer: true,
@@ -38,28 +39,19 @@ export function AppProvider({children}) {
   useEffect(() => {
     setupPlayer().then(console.log('player is setuped'));
   }, []);
-  // Reducer setup
 
+  // Reducer setup
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  //Functions
   async function testReducer() {
     dispatch({});
     const queue = await TrackPlayer.getQueue();
     console.log(queue);
   }
 
-  async function updateTrackInfo(artist, title) {
-    let cover = await getImageFromRadioHeart(artist, title);
-    if (!cover) {
-      console.log('there is no cover');
-    }
-    await TrackPlayer.updateMetadataForTrack(0, {
-      ...streamInfo,
-      title,
-      artist,
-      artwork: cover ? cover : require('../assets/logo.jpg'),
-    });
-    dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover}});
+  function toggleMenu(value) {
+    dispatch({type: 'TOGGLE_MENU', payload: value});
   }
 
   async function playStream() {
@@ -87,23 +79,39 @@ export function AppProvider({children}) {
     TrackPlayer.pause();
   }
 
-  function toggleMenu(value) {
-    dispatch({type: 'TOGGLE_MENU', payload: value});
+  async function updateTrackInfo(artist, title) {
+    if (artist === null) {
+      // if this is jingle
+      dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover: null}});
+      await TrackPlayer.updateMetadataForTrack(0, {
+        ...streamInfo,
+        title,
+        artist,
+        artwork: require('../assets/logo.jpg'),
+      });
+      return null;
+    } else {
+      // if this is a song
+      let cover = await getImageFromRadioHeart(artist, title);
+      console.log(cover);
+      if (!cover) {
+        console.log('there is no cover');
+      }
+      await TrackPlayer.updateMetadataForTrack(0, {
+        ...streamInfo,
+        title,
+        artist,
+        artwork: cover ? cover : require('../assets/logo.jpg'),
+      });
+      dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover}});
+    }
   }
 
   // handle events
   useTrackPlayerEvents([Event.PlaybackMetadataReceived], async e => {
     console.log('now playing:', e.artist, e.title);
-    if (state.initMetadata) {
-      if (e.artist === null) {
-        console.log('throwing');
-      } else {
-        updateTrackInfo(e.artist, e.title);
-      }
-      dispatch({type: 'TOGGLE_INIT_METADATA', payload: false});
-    } else {
-      updateTrackInfo(e.artist, e.title);
-    }
+    dispatch({type: 'TOGGLE_INIT_METADATA', payload: false});
+    updateTrackInfo(e.artist, e.title);
   });
 
   useTrackPlayerEvents([Event.RemotePlay], async e => {
@@ -126,7 +134,6 @@ export function AppProvider({children}) {
       value={{
         state,
         testReducer,
-        TrackPlayer,
         playStream,
         pauseStream,
         toggleMenu,
