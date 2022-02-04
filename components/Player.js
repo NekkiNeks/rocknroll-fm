@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {useGlobalContext} from './context';
 
-export function Player() {
+export default function Player() {
   const {playStream, pauseStream, state} = useGlobalContext();
 
   const {title, artist, cover, isPlaying, firstPlay} = state;

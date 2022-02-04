@@ -79,6 +79,12 @@ export function AppProvider({children}) {
     TrackPlayer.pause();
   }
 
+  async function playPodcast(podcast) {
+    await TrackPlayer.reset();
+    await TrackPlayer.add(podcast);
+    TrackPlayer.play();
+  }
+
   async function updateTrackInfo(artist, title) {
     if (artist === null) {
       // if this is jingle
@@ -137,6 +143,7 @@ export function AppProvider({children}) {
         playStream,
         pauseStream,
         toggleMenu,
+        playPodcast,
       }}>
       {children}
     </AppContext.Provider>

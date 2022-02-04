@@ -1,6 +1,7 @@
 import React from 'react';
 import {Dimensions, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import IconAwesome from 'react-native-vector-icons/FontAwesome5';
 import {useGlobalContext} from './context';
 
 export default function Navbar({state, descriptors, navigation}) {
@@ -15,6 +16,11 @@ export default function Navbar({state, descriptors, navigation}) {
         style={styles.button}
         onPress={() => navigation.navigate('Player')}>
         <Icon name={'radio'} size={35} color={'#eb7209'} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Podcasts')}>
+        <IconAwesome name={'podcast'} size={30} color={'#eb7209'} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}

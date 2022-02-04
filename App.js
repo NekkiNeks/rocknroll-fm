@@ -8,8 +8,9 @@ import {AppProvider} from './components/context';
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Navbar from './components/Navbar';
-import {Player} from './components/Player';
+import Player from './components/Player';
 import List from './components/List';
+import Podcasts from './components/Podcasts';
 
 //code
 function App() {
@@ -25,6 +26,7 @@ function App() {
             tabBar={props => <Navbar {...props} />}
             screenOptions={{headerShown: false}}>
             <Tab.Screen name="Player" component={Player} />
+            <Tab.Screen name="Podcasts" component={Podcasts} />
             <Tab.Screen name="List" component={List} />
           </Tab.Navigator>
           <Menu />
