@@ -12,7 +12,7 @@ const AppContext = React.createContext();
 
 const initialState = {
   firstPlay: true,
-  title: `Rock'n'Roll FM`,
+  title: "Rock'n'Roll FM",
   artist: null,
   cover: null,
   isPlaying: false,
