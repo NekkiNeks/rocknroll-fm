@@ -5,7 +5,7 @@ import TrackPlayer, {
   Capability,
 } from 'react-native-track-player';
 import getImageFromRadioHeart from '../functions/getImageFromRadioHeart';
-import trackInfo from './trackInfo';
+import streamInfo from './streamInfo';
 import reducer from './reducer';
 
 const AppContext = React.createContext();
@@ -48,13 +48,13 @@ export function AppProvider({children}) {
     console.log(queue);
   }
 
-  async function updateSong(artist, title) {
+  async function updateTrackInfo(artist, title) {
     let cover = await getImageFromRadioHeart(artist, title);
     if (!cover) {
       console.log('there is no cover');
     }
     await TrackPlayer.updateMetadataForTrack(0, {
-      ...trackInfo,
+      ...streamInfo,
       title,
       artist,
       artwork: cover ? cover : require('../assets/logo.jpg'),
@@ -69,7 +69,7 @@ export function AppProvider({children}) {
     }
     if (state.init) {
       await TrackPlayer.reset();
-      await TrackPlayer.add([trackInfo]);
+      await TrackPlayer.add([streamInfo]);
       dispatch({type: 'INIT_TOGGLE', payload: false});
     }
     TrackPlayer.play();
@@ -98,11 +98,11 @@ export function AppProvider({children}) {
       if (e.artist === null) {
         console.log('throwing');
       } else {
-        updateSong(e.artist, e.title);
+        updateTrackInfo(e.artist, e.title);
       }
       dispatch({type: 'TOGGLE_INIT_METADATA', payload: false});
     } else {
-      updateSong(e.artist, e.title);
+      updateTrackInfo(e.artist, e.title);
     }
   });
 

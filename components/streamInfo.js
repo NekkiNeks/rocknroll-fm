@@ -3,7 +3,7 @@ const track = {
   title: 'RNRFM',
   artist: 'RNRFM',
   album: 'listening stream',
-  genre: 'Progressive House, Electro House',
+  genre: 'RocknRoll',
   date: '2014-05-20T07:00:00+00:00', // RFC 3339
   artwork: 'http://example.com/cover.png', // Load artwork from the network
   duration: 0, // Duration in seconds
