@@ -4,6 +4,15 @@ function reducer(state, action) {
       console.log(action.payload);
       return state;
     }
+    case 'REFRESH_STATE': {
+      return {
+        ...state,
+        isPlaying: false,
+        firstPlay: true,
+        init: true,
+        cover: null,
+      };
+    }
     case 'UPDATE_SONG': {
       const {title, artist, cover} = action.payload;
       return {...state, title, artist, cover};
@@ -11,8 +20,8 @@ function reducer(state, action) {
     case 'PLAYER_TOGGLE': {
       return {...state, isPlaying: action.payload};
     }
-    case 'INIT_TOGGLE': {
-      return {...state, init: action.payload};
+    case 'PLAYER_MODE_TOGGLE': {
+      return {...state, playerMode: action.payload};
     }
     case 'ADD_TIMEOUT': {
       return {...state, timeout: action.payload};
@@ -20,14 +29,11 @@ function reducer(state, action) {
     case 'DELETE_TIMEOUT': {
       return {...state, timeout: null};
     }
-    case 'TOGGLE_INIT_METADATA': {
-      return {...state, initMetadata: action.payload};
-    }
-    case 'TURN_ON_INIT_METADATA': {
-      return {...state, initMetadata: true};
-    }
     case 'TURN_OFF_FIRST_PLAY': {
       return {...state, firstPlay: false};
+    }
+    case 'INIT_TOGGLE': {
+      return {...state, init: action.payload};
     }
     case 'TOGGLE_MENU': {
       return {...state, showMenu: action.payload};

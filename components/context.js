@@ -11,14 +11,14 @@ import reducer from './reducer';
 const AppContext = React.createContext();
 
 const initialState = {
+  playerMode: 'radio',
   firstPlay: true,
-  title: "Rock'n'Roll FM",
+  title: null,
   artist: null,
   cover: null,
   isPlaying: false,
   init: true,
   timeout: null,
-  initMetadata: true,
   showMenu: false,
 };
 
@@ -40,14 +40,13 @@ export function AppProvider({children}) {
     setupPlayer().then(console.log('player is setuped'));
   }, []);
 
+  console.log('state is updated');
   // Reducer setup
   const [state, dispatch] = useReducer(reducer, initialState);
 
   //Functions
   async function testReducer() {
     dispatch({});
-    const queue = await TrackPlayer.getQueue();
-    console.log(queue);
   }
 
   function toggleMenu(value) {
@@ -64,15 +63,19 @@ export function AppProvider({children}) {
       await TrackPlayer.add([streamInfo]);
       dispatch({type: 'INIT_TOGGLE', payload: false});
     }
+    if (state.playerMode === 'podcast') {
+      dispatch({type: 'PLAYER_MODE_TOGGLE', payload: 'radio'});
+    }
+    if (state.firstPlay === true) {
+      dispatch({type: 'TURN_OFF_FIRST_PLAY'});
+    }
     TrackPlayer.play();
     dispatch({type: 'PLAYER_TOGGLE', payload: true});
-    dispatch({type: 'TURN_OFF_FIRST_PLAY'});
   }
 
   function pauseStream() {
     const timeout = setTimeout(() => {
       dispatch({type: 'INIT_TOGGLE', payload: true});
-      dispatch({type: 'TOGGLE_INIT_METADATA', payload: true});
     }, 10000);
     dispatch({type: 'ADD_TIMEOUT', payload: timeout});
     dispatch({type: 'PLAYER_TOGGLE', payload: false});
@@ -83,6 +86,8 @@ export function AppProvider({children}) {
     await TrackPlayer.reset();
     await TrackPlayer.add(podcast);
     TrackPlayer.play();
+    dispatch({type: 'PLAYER_MODE_TOGGLE', payload: 'podcast'});
+    dispatch({type: 'REFRESH_STATE'});
   }
 
   async function updateTrackInfo(artist, title) {
@@ -95,7 +100,6 @@ export function AppProvider({children}) {
         artist,
         artwork: require('../assets/logo.jpg'),
       });
-      return null;
     } else {
       // if this is a song
       let cover = await getImageFromRadioHeart(artist, title);
@@ -116,18 +120,27 @@ export function AppProvider({children}) {
   // handle events
   useTrackPlayerEvents([Event.PlaybackMetadataReceived], async e => {
     console.log('now playing:', e.artist, e.title);
-    dispatch({type: 'TOGGLE_INIT_METADATA', payload: false});
     updateTrackInfo(e.artist, e.title);
   });
 
   useTrackPlayerEvents([Event.RemotePlay], async e => {
-    console.log('event remote-play fired!');
-    playStream();
+    if (state.playerMode === 'radio') {
+      console.log('event remote-play fired!');
+      playStream();
+    }
+    if (state.playerMode === 'podcast') {
+      TrackPlayer.play();
+    }
   });
 
   useTrackPlayerEvents([Event.RemotePause], async e => {
-    console.log('event remote-pause fired!');
-    pauseStream();
+    if (state.playerMode === 'radio') {
+      console.log('event remote-pause fired!');
+      pauseStream();
+    }
+    if (state.playerMode === 'podcast') {
+      TrackPlayer.pause();
+    }
   });
 
   useTrackPlayerEvents([Event.PlaybackState], async e => {
