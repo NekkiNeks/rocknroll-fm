@@ -28,10 +28,16 @@ export default function Player() {
     setInfoHeight(height);
   }
 
+  const isLoading =
+    playerState === State.Buffering ||
+    playerState === State.Connecting ||
+    playerState === 'buffering' ||
+    playerState === 'loading';
+
   return (
     <View style={styles.container}>
       {/* Image container */}
-      {playerState === State.Buffering || playerState === State.Connecting ? (
+      {isLoading ? (
         <View style={styles.loadingContainer}>
           <Text>
             <Spinner />
