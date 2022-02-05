@@ -31,7 +31,7 @@ export default function Player() {
   return (
     <View style={styles.container}>
       {/* Image container */}
-      {playerState === State.Buffering ? (
+      {playerState === State.Buffering || playerState === State.Connecting ? (
         <View style={styles.loadingContainer}>
           <Text>
             <Spinner />

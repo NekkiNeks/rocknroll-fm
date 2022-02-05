@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useReducer} from 'react';
 import TrackPlayer, {
+  State,
   Event,
   useTrackPlayerEvents,
   Capability,
@@ -146,6 +147,7 @@ export function AppProvider({children}) {
   useTrackPlayerEvents([Event.PlaybackState], async e => {
     const playerState = await TrackPlayer.getState();
     dispatch({type: 'SET_STATE', payload: playerState});
+    console.log(State);
   });
 
   return (
