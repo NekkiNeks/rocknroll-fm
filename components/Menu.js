@@ -15,7 +15,7 @@ export default function Menu() {
 
   useEffect(() => {
     if (showMenu) {
-      Animated.timing(translation, {
+      Animated.spring(translation, {
         toValue: -menuHeight,
         useNativeDriver: true,
         duration: 200,
