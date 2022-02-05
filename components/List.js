@@ -11,7 +11,7 @@ export default function List() {
   const {state} = useGlobalContext();
   const {title} = state;
   const url =
-    'https://a6.radioheart.ru/api/json?userlogin=user8046&count=20&api=lasttrack';
+    'https://a6.radioheart.ru/api/json?userlogin=user8046&count=40&api=lasttrack';
   const [trackList, setTrackList] = useState([]);
   const [loading, setLoading] = useState(true);
 

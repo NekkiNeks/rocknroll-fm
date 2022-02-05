@@ -7,40 +7,44 @@ import {
   Text,
   View,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {State} from 'react-native-track-player';
 
+//Components
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Spinner from './Spinner';
+
+//State
 import {useGlobalContext} from './context';
 
+//Code
 export default function Player() {
   const {playStream, pauseStream, state} = useGlobalContext();
+  const {title, artist, cover, isPlaying, firstPlay, playerState} = state;
 
-  const {title, artist, cover, isPlaying, firstPlay} = state;
-
+  //Get height of info container
   const [infoHeight, setInfoHeight] = useState(0);
-
   function getInfoHeight(e) {
     const {height} = e.nativeEvent.layout;
     setInfoHeight(height);
   }
 
-  if (state.loading) {
-    return (
-      <View style={styles.container}>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
-
   return (
     <View style={styles.container}>
       {/* Image container */}
-      <View style={styles.imageContainer}>
-        {cover ? (
-          <Image source={{uri: cover}} style={styles.cover} />
-        ) : (
-          <Image source={require('../assets/logo.jpg')} style={styles.cover} />
-        )}
-      </View>
+      {playerState === State.Buffering ? (
+        <View style={styles.loadingContainer}>
+          <Text>
+            <Spinner />
+          </Text>
+        </View>
+      ) : (
+        <View style={styles.imageContainer}>
+          <Image
+            source={cover ? {uri: cover} : require('../assets/logo.jpg')}
+            style={styles.cover}
+          />
+        </View>
+      )}
 
       {/* info container */}
       {!firstPlay && (
@@ -81,8 +85,9 @@ export default function Player() {
   );
 }
 
+//Get width of phone
 const fullWidth = Dimensions.get('window').width; //full width
-const croppedWidth = fullWidth;
+const croppedWidth = fullWidth; // REMOVE LATER
 
 const styles = StyleSheet.create({
   container: {
@@ -93,6 +98,11 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     height: croppedWidth,
+  },
+  loadingContainer: {
+    height: croppedWidth,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   cover: {
     // flex: 1,

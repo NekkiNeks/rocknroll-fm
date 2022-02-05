@@ -23,6 +23,9 @@ function reducer(state, action) {
     case 'PLAYER_MODE_TOGGLE': {
       return {...state, playerMode: action.payload};
     }
+    case 'SET_STATE': {
+      return {...state, playerState: action.payload};
+    }
     case 'ADD_TIMEOUT': {
       return {...state, timeout: action.payload};
     }

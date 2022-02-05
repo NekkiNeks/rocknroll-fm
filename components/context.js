@@ -12,6 +12,7 @@ const AppContext = React.createContext();
 
 const initialState = {
   playerMode: 'radio',
+  playerState: null,
   firstPlay: true,
   title: null,
   artist: null,
@@ -40,7 +41,6 @@ export function AppProvider({children}) {
     setupPlayer().then(console.log('player is setuped'));
   }, []);
 
-  console.log('state is updated');
   // Reducer setup
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -145,7 +145,7 @@ export function AppProvider({children}) {
 
   useTrackPlayerEvents([Event.PlaybackState], async e => {
     const playerState = await TrackPlayer.getState();
-    console.log('player state: ', playerState);
+    dispatch({type: 'SET_STATE', payload: playerState});
   });
 
   return (
