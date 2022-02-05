@@ -1,13 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import {
-  TouchableOpacity,
-  StyleSheet,
-  Text,
-  ScrollView,
-  FlatList,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, ScrollView, View} from 'react-native';
 
 //components
 import Podcast from './Podcast';

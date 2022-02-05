@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Text, Image, View} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
 import {useGlobalContext} from './context';
 
 export default function Podcast({
