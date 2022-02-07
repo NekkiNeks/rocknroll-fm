@@ -43,7 +43,7 @@ export default function Podcasts() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: '10%',
+    paddingHorizontal: '7%',
     flex: 1,
     backgroundColor: '#000',
   },

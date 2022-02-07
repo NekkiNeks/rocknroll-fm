@@ -3,6 +3,7 @@ import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
   Capability,
+  useProgress,
 } from 'react-native-track-player';
 import getImageFromRadioHeart from '../functions/getImageFromRadioHeart';
 import streamInfo from './streamInfo';
@@ -21,6 +22,7 @@ const initialState = {
   init: true,
   timeout: null,
   showMenu: false,
+  currentPodcast: null,
 };
 
 export function AppProvider({children}) {
@@ -65,6 +67,7 @@ export function AppProvider({children}) {
     }
     if (state.playerMode === 'podcast') {
       dispatch({type: 'PLAYER_MODE_TOGGLE', payload: 'radio'});
+      dispatch({type: 'SET_CURRENT_PODCAST', payload: null});
     }
     if (state.firstPlay === true) {
       dispatch({type: 'TURN_OFF_FIRST_PLAY'});
@@ -82,11 +85,12 @@ export function AppProvider({children}) {
     TrackPlayer.pause();
   }
 
-  async function playPodcast(podcast) {
+  async function playPodcast(podcast, id) {
     await TrackPlayer.reset();
     await TrackPlayer.add(podcast);
     TrackPlayer.play();
     dispatch({type: 'PLAYER_MODE_TOGGLE', payload: 'podcast'});
+    dispatch({type: 'SET_CURRENT_PODCAST', payload: id});
     dispatch({type: 'REFRESH_STATE'});
   }
 
@@ -148,6 +152,8 @@ export function AppProvider({children}) {
     dispatch({type: 'SET_STATE', payload: playerState});
   });
 
+  const {position, buffered, duration} = useProgress();
+
   return (
     <AppContext.Provider
       value={{
@@ -157,6 +163,9 @@ export function AppProvider({children}) {
         pauseStream,
         toggleMenu,
         playPodcast,
+        position,
+        buffered,
+        duration,
       }}>
       {children}
     </AppContext.Provider>
