@@ -10,7 +10,7 @@ export default function Podcasts() {
   const [podcasts, setPodcasts] = useState([]);
 
   async function getPodcasts() {
-    let res = await fetch('http://10.0.2.2:6666/podcasts');
+    let res = await fetch('http://192.168.1.37:6666/podcasts');
     res = await res.json();
     setPodcasts(res);
     setLoading(false);
