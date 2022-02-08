@@ -66,11 +66,9 @@ function ActivePart({description}) {
 }
 
 function PodcastPlayer() {
-  const {position, buffered, duration} = useGlobalContext();
+  const {position} = useGlobalContext();
 
   const [playing, setPlaying] = useState(true);
-
-  // console.log(position, buffered, duration);
 
   function handlePress() {
     if (playing) {
@@ -83,11 +81,7 @@ function PodcastPlayer() {
   }
   return (
     <View style={styles.player}>
-      <ProgressBar
-        position={position}
-        buffered={buffered}
-        duration={duration}
-      />
+      <ProgressBar />
       <View style={styles.playerButtons}>
         <TouchableOpacity
           style={styles.playerButton}
@@ -111,7 +105,8 @@ function PodcastPlayer() {
   );
 }
 
-function ProgressBar({position, duration, buffered}) {
+function ProgressBar() {
+  const {position, duration, buffered} = useGlobalContext();
   const bufferedProgress = (buffered * 100) / duration;
   const positionProgress = (position * 100) / duration;
 
