@@ -10,7 +10,7 @@ import Menu from './components/Menu';
 import Navbar from './components/Navbar';
 import Player from './components/Player';
 import List from './components/List';
-import Podcasts from './components/Podcasts';
+import PodcastsMenu from './components/PodcastsRouter';
 
 //code
 function App() {
@@ -18,15 +18,14 @@ function App() {
 
   return (
     <AppProvider>
-      <NavigationContainer
-        options={{headerTitle: props => <Navbar {...props} />}}>
+      <NavigationContainer>
         <SafeAreaView style={styles.mainContainer}>
           <Header />
           <Tab.Navigator
             tabBar={props => <Navbar {...props} />}
             screenOptions={{headerShown: false}}>
             <Tab.Screen name="Player" component={Player} />
-            <Tab.Screen name="Podcasts" component={Podcasts} />
+            <Tab.Screen name="PodcastsMenu" component={PodcastsMenu} />
             <Tab.Screen name="List" component={List} />
           </Tab.Navigator>
           <Menu />

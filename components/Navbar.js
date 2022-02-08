@@ -19,7 +19,7 @@ export default function Navbar({state, descriptors, navigation}) {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Podcasts')}>
+        onPress={() => navigation.navigate('PodcastsMenu')}>
         <IconAwesome name={'podcast'} size={30} color={'#eb7209'} />
       </TouchableOpacity>
       <TouchableOpacity

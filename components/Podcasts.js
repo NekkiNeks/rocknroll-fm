@@ -5,12 +5,13 @@ import {StyleSheet, Text, ScrollView, View} from 'react-native';
 import Podcast from './Podcast';
 import Spinner from './Spinner';
 
-export default function Podcasts() {
+export default function Podcasts({route, navigation}) {
+  const {path} = route.params;
   const [loading, setLoading] = useState(true);
   const [podcasts, setPodcasts] = useState([]);
 
   async function getPodcasts() {
-    let res = await fetch('http://192.168.1.37:6666/podcasts');
+    let res = await fetch(`http://192.168.1.37:6666/${path}`);
     res = await res.json();
     setPodcasts(res);
     setLoading(false);
@@ -18,6 +19,7 @@ export default function Podcasts() {
 
   useEffect(() => {
     getPodcasts().catch(err => console.log(err.message));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
@@ -56,10 +58,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  spinner: {
-    transform: {
-      rotateX: '120deg',
-    },
   },
 });
