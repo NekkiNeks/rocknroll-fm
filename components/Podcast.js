@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
 import TrackPlayer from 'react-native-track-player';
+import Slider from '@react-native-community/slider';
 
 //components
 import {useGlobalContext} from './context';
@@ -107,16 +108,22 @@ function PodcastPlayer() {
 
 function ProgressBar() {
   const {position, duration, buffered} = useGlobalContext();
-  const bufferedProgress = (buffered * 100) / duration;
-  const positionProgress = (position * 100) / duration;
 
   return (
     <View style={styles.progressContainer}>
       <Text style={styles.progressText}>22:14</Text>
-      <View style={styles.bar}>
-        <View style={[styles.buffering, {width: `${bufferedProgress}%`}]} />
-        <View style={[styles.playing, {width: `${positionProgress}%`}]} />
-      </View>
+      <Slider
+        style={styles.bar}
+        value={position}
+        minimumValue={0}
+        maximumValue={duration}
+        thumbTintColor="#eb7209"
+        minimumTrackTintColor="#eb7209"
+        maximumTrackTintColor="#FFFFFF"
+        onSlidingComplete={async value => {
+          await TrackPlayer.seekTo(value);
+        }}
+      />
       <Text style={styles.progressText}>44:02</Text>
     </View>
   );
@@ -182,20 +189,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bar: {
-    backgroundColor: '#555',
     flex: 1,
     width: '100%',
-    height: 3,
-  },
-  playing: {
-    backgroundColor: '#fff',
-    position: 'absolute',
-    height: 3,
-  },
-  buffering: {
-    backgroundColor: '#aaa',
-    position: 'absolute',
-    height: 3,
+    height: 20,
   },
   progressText: {
     marginHorizontal: 10,
