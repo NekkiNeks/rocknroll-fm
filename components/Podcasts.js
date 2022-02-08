@@ -32,7 +32,7 @@ export default function Podcasts() {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView style={styles.scrollContainer} overScrollMode={'never'}>
         {podcasts.map(item => {
           return <Podcast {...item} key={item.id} />;
         })}

@@ -40,20 +40,33 @@ export default function Podcast({
     playPodcast(Track, id);
   }
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() => {
-        if (!thisPodcastPlaying) {
-          addPodcast();
-        }
-      }}>
+    <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Image source={{uri: image}} style={styles.image} />
         <Text style={[styles.text, styles.title]}>{title}</Text>
       </View>
-      <Text style={[styles.text, styles.duration]}>{stringDuration} мин.</Text>
-      {thisPodcastPlaying && <ActivePart description={description} />}
-    </TouchableOpacity>
+      {thisPodcastPlaying ? (
+        <ActivePart description={description} />
+      ) : (
+        <View style={styles.optionsContainer}>
+          <TouchableOpacity style={{alignSelf: 'flex-end'}}>
+            <Icon name={'share'} size={20} color={'#999'} />
+          </TouchableOpacity>
+          <View style={styles.playButtonContainer}>
+            <Text style={styles.duration}>{stringDuration} мин.</Text>
+
+            <TouchableOpacity
+              onPress={() => {
+                if (!thisPodcastPlaying) {
+                  addPodcast();
+                }
+              }}>
+              <Icon name={'play-circle-filled'} size={30} color={'#fff'} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+    </View>
   );
 }
 
@@ -107,11 +120,16 @@ function PodcastPlayer() {
 }
 
 function ProgressBar() {
-  const {position, duration, buffered} = useGlobalContext();
+  const {position, duration} = useGlobalContext();
+
+  const positionString = new Date(position * 1000).toISOString().substr(14, 5);
+  const durationString = new Date((duration - position) * 1000)
+    .toISOString()
+    .substr(14, 5);
 
   return (
     <View style={styles.progressContainer}>
-      <Text style={styles.progressText}>22:14</Text>
+      <Text style={styles.progressText}>{positionString}</Text>
       <Slider
         style={styles.bar}
         value={position}
@@ -124,7 +142,7 @@ function ProgressBar() {
           await TrackPlayer.seekTo(value);
         }}
       />
-      <Text style={styles.progressText}>44:02</Text>
+      <Text style={styles.progressText}>{durationString}</Text>
     </View>
   );
 }
@@ -134,10 +152,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#111',
     borderRadius: 7,
     marginTop: 10,
-    padding: 10,
+    padding: 15,
   },
   titleContainer: {
     flexDirection: 'row',
+  },
+  optionsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  playButtonContainer: {
+    // marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   image: {
     width: 50,
@@ -152,8 +182,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   duration: {
-    marginTop: 10,
+    marginRight: 20,
     fontSize: 12,
+    color: '#999',
   },
   text: {
     color: '#fff',
@@ -170,7 +201,7 @@ const styles = StyleSheet.create({
 
   //player
   player: {
-    marginTop: 20,
+    marginTop: 10,
   },
   playerButtons: {
     flexDirection: 'row',
@@ -191,10 +222,10 @@ const styles = StyleSheet.create({
   bar: {
     flex: 1,
     width: '100%',
-    height: 20,
+    height: 40,
   },
   progressText: {
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     fontSize: 10,
     color: '#fff',
   },
