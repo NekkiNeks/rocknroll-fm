@@ -17,17 +17,13 @@ export default function Header() {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.link}>
-        {!firstPlay && (
-          <Image
-            source={require('../assets/logo.jpg')}
-            style={styles.logoImage}
-          />
-        )}
+        <Image
+          source={require('../assets/logo.jpg')}
+          style={styles.logoImage}
+        />
       </TouchableOpacity>
       <View style={styles.textContainer}>
-        {!firstPlay && (
-          <Text style={styles.text}>ПЕРВОЕ {'\n'} МУЖСКОЕ РАДИО</Text>
-        )}
+        <Text style={styles.text}>ПЕРВОЕ {'\n'} МУЖСКОЕ РАДИО</Text>
       </View>
       <View>
         <TouchableOpacity style={styles.link} onPress={testReducer}>
