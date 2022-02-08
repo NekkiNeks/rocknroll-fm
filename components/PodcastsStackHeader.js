@@ -2,25 +2,28 @@ import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export default function PodcastsStackHeader() {
+export default function PodcastsStackHeader({route, navigation}) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <Icon name="back" size={25} color={'#fff'} />
-        <Text style={styles.text}>CUSTOM HEADER TEXT</Text>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Icon name="arrow-back-ios" size={25} color={'#fff'} />
       </TouchableOpacity>
+      <Text style={styles.text}>{route.name}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#111',
-    height: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#000',
+    paddingHorizontal: 20,
     paddingTop: 15,
-    paddingBottom: 25,
+    paddingBottom: 10,
   },
   text: {
+    marginLeft: 10,
     color: '#fff',
     fontSize: 20,
   },
