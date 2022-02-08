@@ -7,19 +7,19 @@ export default function PodcastsMenu({navigation}) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Хедлайнер', {path: 'headliner'})}>
-        <Text>Хедлайнер</Text>
+        <Text style={styles.text}>{'Проект\nХедлайнер'}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Не Шоу', {path: 'neshow'})}>
-        <Text>Не Шоу</Text>
+        <Text style={styles.text}>Не Шоу</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
           navigation.navigate('Виниломания', {path: 'vinilomania'})
         }>
-        <Text>Виниломания</Text>
+        <Text style={styles.text}>Виниломания</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#000',
     paddingHorizontal: 30,
-    paddingTop: 10,
   },
   button: {
     backgroundColor: '#aaa',
@@ -37,5 +36,10 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     borderRadius: 10,
+    justifyContent: 'flex-end',
+  },
+  text: {
+    fontSize: 22,
+    color: '#000',
   },
 });
