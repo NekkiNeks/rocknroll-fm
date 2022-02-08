@@ -49,7 +49,7 @@ export default function Podcast({
         <ActivePart description={description} />
       ) : (
         <View style={styles.optionsContainer}>
-          <TouchableOpacity style={{alignSelf: 'flex-end'}}>
+          <TouchableOpacity style={styles.shareButton}>
             <Icon name={'share'} size={20} color={'#999'} />
           </TouchableOpacity>
           <View style={styles.playButtonContainer}>
@@ -164,10 +164,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   playButtonContainer: {
-    // marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  shareButton: {
+    alignSelf: 'flex-end',
   },
   image: {
     width: 50,
