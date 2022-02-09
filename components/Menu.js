@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {TouchableOpacity, StyleSheet, Animated} from 'react-native';
+import {TouchableOpacity, StyleSheet, Animated, Linking} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useGlobalContext} from './context';
 
@@ -13,6 +13,14 @@ export default function Menu() {
   const [menuHeight, setMenuHeight] = useState(0);
   const translation = useRef(new Animated.Value(0)).current;
 
+  function openUrl(url) {
+    Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
+  }
+
+  function openPhone() {
+    const link = 'tel://+79996377097';
+    Linking.openURL(link).catch(err => console.error('sorry i cant', err));
+  }
   useEffect(() => {
     if (showMenu) {
       Animated.spring(translation, {
@@ -56,10 +64,15 @@ export default function Menu() {
         <Icon name={'keyboard-arrow-down'} size={30} color={'#fff'} />
       </TouchableOpacity>
       <MenuButton text={'Настройки'} />
-      <MenuButton text={'Подкасты'} />
-      <MenuButton text={'Позвонить в эфир'} />
-      <MenuButton text={'Поддержать радиостанцию'} />
-      <MenuButton text={'Перейти на сайт'} />
+      <MenuButton text={'Позвонить в эфир'} onPress={() => openPhone()} />
+      <MenuButton
+        text={'Поддержать радиостанцию'}
+        onPress={() => openUrl('https://rnr.fm')}
+      />
+      <MenuButton
+        text={'Перейти на сайт'}
+        onPress={() => openUrl('https://rnr.fm')}
+      />
     </Animated.View>
   );
 }
