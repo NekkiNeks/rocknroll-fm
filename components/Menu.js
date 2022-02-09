@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    backgroundColor: '#000',
   },
   closeButton: {
     paddingVertical: 10,

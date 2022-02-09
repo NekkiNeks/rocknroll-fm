@@ -4,8 +4,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconAwesome from 'react-native-vector-icons/FontAwesome5';
 import {useGlobalContext} from './context';
 
-export default function Navbar({state, descriptors, navigation}) {
+export default function Navbar({state, navigation}) {
   const {toggleMenu} = useGlobalContext();
+  console.log(state.index);
+
+  const activeColor = '#eb7209';
+  const inactiveColor = '#4d4d4d';
 
   return (
     <View style={styles.container}>
@@ -15,17 +19,29 @@ export default function Navbar({state, descriptors, navigation}) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Player')}>
-        <Icon name={'radio'} size={35} color={'#eb7209'} />
+        <Icon
+          name={'radio'}
+          size={35}
+          color={state.index === 0 ? activeColor : inactiveColor}
+        />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('PodcastsMenu')}>
-        <IconAwesome name={'podcast'} size={30} color={'#eb7209'} />
+        <IconAwesome
+          name={'podcast'}
+          size={30}
+          color={state.index === 1 ? activeColor : inactiveColor}
+        />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('List')}>
-        <Icon name={'queue-music'} size={45} color={'#4d4d4d'} />
+        <Icon
+          name={'queue-music'}
+          size={45}
+          color={state.index === 2 ? activeColor : inactiveColor}
+        />
       </TouchableOpacity>
     </View>
   );
