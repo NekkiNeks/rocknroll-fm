@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useReducer} from 'react';
+import {Linking} from 'react-native';
 import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
@@ -152,6 +153,16 @@ export function AppProvider({children}) {
     dispatch({type: 'SET_STATE', payload: playerState});
   });
 
+  //Native Functions
+  function openUrl(url) {
+    Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
+  }
+
+  function openPhone() {
+    const link = 'tel://+79996377097';
+    Linking.openURL(link).catch(err => console.error('sorry i cant', err));
+  }
+
   const {position, buffered, duration} = useProgress();
 
   return (
@@ -166,6 +177,8 @@ export function AppProvider({children}) {
         position,
         buffered,
         duration,
+        openUrl,
+        openPhone,
       }}>
       {children}
     </AppContext.Provider>

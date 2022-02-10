@@ -6,7 +6,6 @@ import {useGlobalContext} from './context';
 
 export default function Navbar({state, navigation}) {
   const {toggleMenu} = useGlobalContext();
-  console.log(state.index);
 
   const activeColor = '#eb7209';
   const inactiveColor = '#4d4d4d';

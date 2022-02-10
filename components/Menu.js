@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {TouchableOpacity, StyleSheet, Animated, Linking} from 'react-native';
+import {TouchableOpacity, StyleSheet, Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useGlobalContext} from './context';
 
@@ -7,20 +7,12 @@ import {useGlobalContext} from './context';
 import MenuButton from './MenuButton';
 
 export default function Menu() {
-  const {state, toggleMenu} = useGlobalContext();
+  const {state, toggleMenu, openUrl, openPhone} = useGlobalContext();
   const {showMenu} = state;
 
   const [menuHeight, setMenuHeight] = useState(0);
   const translation = useRef(new Animated.Value(0)).current;
 
-  function openUrl(url) {
-    Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
-  }
-
-  function openPhone() {
-    const link = 'tel://+79996377097';
-    Linking.openURL(link).catch(err => console.error('sorry i cant', err));
-  }
   useEffect(() => {
     if (showMenu) {
       Animated.spring(translation, {
