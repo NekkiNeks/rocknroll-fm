@@ -24,6 +24,7 @@ const initialState = {
   timeout: null,
   showMenu: false,
   currentPodcast: null,
+  podcastPlaying: true,
 };
 
 export function AppProvider({children}) {
@@ -122,6 +123,10 @@ export function AppProvider({children}) {
     }
   }
 
+  function togglePodcastPlaying(state) {
+    dispatch({type: 'TOGGLE_PODCAST_PLAYING', payload: state});
+  }
+
   // handle events
   useTrackPlayerEvents([Event.PlaybackMetadataReceived], async e => {
     console.log('now playing:', e.artist, e.title);
@@ -135,6 +140,7 @@ export function AppProvider({children}) {
     }
     if (state.playerMode === 'podcast') {
       TrackPlayer.play();
+      togglePodcastPlaying(true);
     }
   });
 
@@ -145,6 +151,7 @@ export function AppProvider({children}) {
     }
     if (state.playerMode === 'podcast') {
       TrackPlayer.pause();
+      togglePodcastPlaying(false);
     }
   });
 
@@ -179,6 +186,7 @@ export function AppProvider({children}) {
         duration,
         openUrl,
         openPhone,
+        togglePodcastPlaying,
       }}>
       {children}
     </AppContext.Provider>

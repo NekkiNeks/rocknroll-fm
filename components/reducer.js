@@ -44,6 +44,9 @@ function reducer(state, action) {
     case 'SET_CURRENT_PODCAST': {
       return {...state, currentPodcast: action.payload};
     }
+    case 'TOGGLE_PODCAST_PLAYING': {
+      return {...state, podcastPlaying: action.payload};
+    }
 
     default: {
       console.log(state);

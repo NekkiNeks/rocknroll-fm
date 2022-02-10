@@ -80,17 +80,17 @@ function ActivePart({description}) {
 }
 
 function PodcastPlayer() {
-  const {position} = useGlobalContext();
-
+  const {position, state, togglePodcastPlaying} = useGlobalContext();
+  const {podcastPlaying} = state;
   const [playing, setPlaying] = useState(true);
 
   function handlePress() {
-    if (playing) {
+    if (podcastPlaying) {
       TrackPlayer.pause();
-      setPlaying(false);
+      togglePodcastPlaying(false);
     } else {
       TrackPlayer.play();
-      setPlaying(true);
+      togglePodcastPlaying(true);
     }
   }
   return (
@@ -103,7 +103,7 @@ function PodcastPlayer() {
           <Icon name={'replay-30'} size={30} color={'#fff'} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.playerButton} onPress={handlePress}>
-          {playing ? (
+          {podcastPlaying ? (
             <Icon name={'pause'} size={55} color={'#fff'} />
           ) : (
             <Icon name={'play-arrow'} size={55} color={'#fff'} />
