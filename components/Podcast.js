@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import Slider from '@react-native-community/slider';
@@ -82,7 +82,6 @@ function ActivePart({description}) {
 function PodcastPlayer() {
   const {position, state, togglePodcastPlaying} = useGlobalContext();
   const {podcastPlaying} = state;
-  const [playing, setPlaying] = useState(true);
 
   function handlePress() {
     if (podcastPlaying) {

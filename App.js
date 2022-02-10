@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView} from 'react-native';
+import {StyleSheet, SafeAreaView, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
@@ -18,6 +18,7 @@ function App() {
 
   return (
     <AppProvider>
+      <StatusBar barStyle="light-content" />
       <NavigationContainer>
         <SafeAreaView style={styles.mainContainer}>
           <Header />
