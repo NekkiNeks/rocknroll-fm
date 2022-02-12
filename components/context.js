@@ -37,7 +37,7 @@ export function AppProvider({children}) {
     // Player options
     await TrackPlayer.updateOptions({
       stopWithApp: true,
-      capabilities: [Capability.Play, Capability.Pause],
+      capabilities: [Capability.Play, Capability.Pause, Capability.SeekTo],
       compactCapabilities: [Capability.Play, Capability.Pause],
     });
   }
@@ -110,16 +110,13 @@ export function AppProvider({children}) {
       // if this is a song
       let cover = await getImageFromRadioHeart(artist, title);
       console.log(cover);
-      if (!cover) {
-        console.log('there is no cover');
-      }
+      dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover}});
       await TrackPlayer.updateMetadataForTrack(0, {
         ...streamInfo,
         title,
         artist,
         artwork: cover ? cover : require('../assets/logo.jpg'),
       });
-      dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover}});
     }
   }
 
@@ -158,6 +155,10 @@ export function AppProvider({children}) {
   useTrackPlayerEvents([Event.PlaybackState], async e => {
     const playerState = await TrackPlayer.getState();
     dispatch({type: 'SET_STATE', payload: playerState});
+  });
+
+  useTrackPlayerEvents([Event.RemoteDuck], async e => {
+    TrackPlayer.play();
   });
 
   //Native Functions
