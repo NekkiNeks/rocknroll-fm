@@ -19,7 +19,8 @@ import {useGlobalContext} from './context';
 //Code
 export default function Player() {
   const {playStream, pauseStream, state} = useGlobalContext();
-  const {title, artist, cover, isPlaying, firstPlay, playerState} = state;
+  const {title, artist, cover, isPlaying, firstPlay, playerState, playerMode} =
+    state;
 
   //Get height of info container
   const [infoHeight, setInfoHeight] = useState(0);
@@ -29,10 +30,11 @@ export default function Player() {
   }
 
   const isLoading =
-    playerState === State.Buffering ||
-    playerState === State.Connecting ||
-    playerState === 'buffering' ||
-    playerState === 'loading';
+    playerMode === 'radio' &&
+    (playerState === State.Buffering ||
+      playerState === State.Connecting ||
+      playerState === 'buffering' ||
+      playerState === 'loading');
 
   return (
     <View style={styles.container}>

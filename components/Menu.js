@@ -71,7 +71,7 @@ export default function Menu() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 25,
+    paddingBottom: 40,
     flex: 1,
     position: 'absolute',
     left: 0,
