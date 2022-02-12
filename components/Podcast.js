@@ -98,7 +98,7 @@ function PodcastPlayer() {
       <View style={styles.playerButtons}>
         <TouchableOpacity
           style={styles.playerButton}
-          onPress={async () => await TrackPlayer.seekTo(position - 15)}>
+          onPress={async () => await TrackPlayer.seekTo(position - 30)}>
           <Icon name={'replay-30'} size={30} color={'#fff'} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.playerButton} onPress={handlePress}>
@@ -110,7 +110,7 @@ function PodcastPlayer() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.playerButton}
-          onPress={async () => await TrackPlayer.seekTo(position + 15)}>
+          onPress={async () => await TrackPlayer.seekTo(position + 30)}>
           <Icon name={'forward-30'} size={30} color={'#fff'} />
         </TouchableOpacity>
       </View>

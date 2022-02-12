@@ -39,6 +39,7 @@ export function AppProvider({children}) {
       stopWithApp: true,
       capabilities: [Capability.Play, Capability.Pause, Capability.SeekTo],
       compactCapabilities: [Capability.Play, Capability.Pause],
+      alwaysPauseOnInterruption: true,
     });
   }
   useEffect(() => {
@@ -158,7 +159,14 @@ export function AppProvider({children}) {
   });
 
   useTrackPlayerEvents([Event.RemoteDuck], async e => {
-    TrackPlayer.play();
+    if (!e.paused) {
+      TrackPlayer.play();
+    }
+  });
+
+  useTrackPlayerEvents([Event.RemoteSeek], async e => {
+    console.log(e);
+    await TrackPlayer.seekTo(e.position);
   });
 
   //Native Functions
