@@ -181,10 +181,8 @@ export function AppProvider({children}) {
   }
 
   function shareMessage(message) {
-    return Share.share({message});
+    Share.share({message});
   }
-
-  const {position, buffered, duration} = useProgress();
 
   return (
     <AppContext.Provider
@@ -195,9 +193,6 @@ export function AppProvider({children}) {
         pauseStream,
         toggleMenu,
         playPodcast,
-        position,
-        buffered,
-        duration,
         openUrl,
         openPhone,
         shareMessage,

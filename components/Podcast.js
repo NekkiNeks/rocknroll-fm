@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, {useProgress} from 'react-native-track-player';
 import Slider from '@react-native-community/slider';
 
 //components
@@ -85,7 +85,8 @@ function ActivePart({description}) {
 }
 
 function PodcastPlayer() {
-  const {position, state, togglePodcastPlaying} = useGlobalContext();
+  const {position} = useProgress();
+  const {state, togglePodcastPlaying} = useGlobalContext();
   const {podcastPlaying} = state;
 
   function handlePress() {
@@ -124,7 +125,7 @@ function PodcastPlayer() {
 }
 
 function ProgressBar() {
-  const {position, duration} = useGlobalContext();
+  const {position, duration} = useProgress();
 
   const positionString = new Date(position * 1000).toISOString().substr(14, 5);
   const durationString = new Date((duration - position) * 1000)
