@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useReducer} from 'react';
-import {Linking} from 'react-native';
+import {Linking, Share} from 'react-native';
 import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
@@ -179,6 +179,10 @@ export function AppProvider({children}) {
     Linking.openURL(link).catch(err => console.error('sorry i cant', err));
   }
 
+  function shareMessage(message) {
+    return Share.share({message});
+  }
+
   const {position, buffered, duration} = useProgress();
 
   return (
@@ -195,6 +199,7 @@ export function AppProvider({children}) {
         duration,
         openUrl,
         openPhone,
+        shareMessage,
         togglePodcastPlaying,
       }}>
       {children}

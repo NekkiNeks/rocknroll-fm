@@ -11,12 +11,12 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Header() {
-  const {state, testReducer} = useGlobalContext();
+  const {state, testReducer, shareMessage} = useGlobalContext();
   const {firstPlay} = state;
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.link}>
+      <TouchableOpacity style={styles.link} onPress={testReducer}>
         <Image
           source={require('../assets/logo.jpg')}
           style={styles.logoImage}
@@ -26,7 +26,13 @@ export default function Header() {
         <Text style={styles.text}>ПЕРВОЕ {'\n'} МУЖСКОЕ РАДИО</Text>
       </View>
       <View>
-        <TouchableOpacity style={styles.link} onPress={testReducer}>
+        <TouchableOpacity
+          style={styles.link}
+          onPress={() =>
+            shareMessage(
+              'Вот ссылка на сайт первого мужского радио: https://rnr.fm',
+            )
+          }>
           <Icon name={'share'} size={25} color={'#fff'} />
         </TouchableOpacity>
       </View>

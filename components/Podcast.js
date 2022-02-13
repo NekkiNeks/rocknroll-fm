@@ -15,13 +15,16 @@ export default function Podcast({
   image,
   date,
   id,
+  shareLink,
 }) {
-  const {playPodcast, state} = useGlobalContext();
+  const {playPodcast, state, shareMessage} = useGlobalContext();
   const {currentPodcast} = state;
 
   const thisPodcastPlaying = currentPodcast === id;
 
   const stringDuration = (duration / 60000).toFixed();
+
+  const messageForShare = `Послушай этот подкаст, рекомендую! \nhttps://anchor.fm${shareLink}`;
 
   async function addPodcast() {
     let url = await fetch(`http://192.168.1.37:6666/podcasts/${id}`);
@@ -49,7 +52,9 @@ export default function Podcast({
         <ActivePart description={description} />
       ) : (
         <View style={styles.optionsContainer}>
-          <TouchableOpacity style={styles.shareButton}>
+          <TouchableOpacity
+            style={styles.shareButton}
+            onPress={() => shareMessage(messageForShare)}>
             <Icon name={'share'} size={20} color={'#999'} />
           </TouchableOpacity>
           <View style={styles.playButtonContainer}>
