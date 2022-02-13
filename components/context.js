@@ -109,9 +109,10 @@ export function AppProvider({children}) {
       });
     } else {
       // if this is a song
+      dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover: null}});
       let cover = await getImageFromRadioHeart(artist, title);
-      console.log(cover);
       dispatch({type: 'UPDATE_SONG', payload: {title, artist, cover}});
+      console.log(cover);
       await TrackPlayer.updateMetadataForTrack(0, {
         ...streamInfo,
         title,
@@ -121,8 +122,8 @@ export function AppProvider({children}) {
     }
   }
 
-  function togglePodcastPlaying(state) {
-    dispatch({type: 'TOGGLE_PODCAST_PLAYING', payload: state});
+  function togglePodcastPlaying(value) {
+    dispatch({type: 'TOGGLE_PODCAST_PLAYING', payload: value});
   }
 
   // handle events
