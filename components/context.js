@@ -68,7 +68,7 @@ export function AppProvider({children}) {
   function searchSong(serviceName) {
     if (serviceName === 'spotify') {
       openUrl(
-        `https://open.spotify.com/search/results/${state.artist} - ${state.title}`,
+        `https://open.spotify.com/search/${state.artist} - ${state.title}`,
       );
     } else if (serviceName === 'apple') {
       openUrl(

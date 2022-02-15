@@ -11,8 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Header() {
-  const {state, testReducer, shareMessage} = useGlobalContext();
-  const {firstPlay} = state;
+  const {testReducer, shareMessage} = useGlobalContext();
 
   return (
     <View style={styles.container}>

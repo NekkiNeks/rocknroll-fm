@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Text, TouchableOpacity, StyleSheet, Animated} from 'react-native';
+import {TouchableOpacity, StyleSheet, Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useGlobalContext} from './context';
 
@@ -55,7 +55,6 @@ export default function Menu() {
         onPress={() => toggleSearchMenu(false)}>
         <Icon name={'keyboard-arrow-down'} size={30} color={'#fff'} />
       </TouchableOpacity>
-      {/* <Text style={styles.header}>Найти песню :</Text> */}
       <MenuButton text={'Spotify'} onPress={() => searchSong('spotify')} />
       <MenuButton text={'Apple Music'} onPress={() => searchSong('apple')} />
       <MenuButton text={'Яндекс.Музыка'} onPress={() => searchSong('yandex')} />
@@ -75,16 +74,5 @@ const styles = StyleSheet.create({
   closeButton: {
     paddingVertical: 10,
     alignItems: 'center',
-  },
-  header: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 24,
-    width: '85%',
-    marginLeft: 30,
-    paddingBottom: 10,
-    marginBottom: 5,
-    borderBottomWidth: 1,
-    borderBottomColor: '#222',
   },
 });
