@@ -24,7 +24,7 @@ export default function Podcast({
 
   const stringDuration = (duration / 60000).toFixed();
 
-  const messageForShare = `Послушай этот подкаст, рекомендую! \nhttps://anchor.fm${shareLink}`;
+  const messageForShare = `Послушай этот подкаст от Rock'n'Roll FM! \nhttps://anchor.fm${shareLink}`;
 
   async function addPodcast() {
     let url = await fetch(`http://192.168.1.37:6666/podcasts/${id}`);

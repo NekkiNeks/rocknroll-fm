@@ -64,15 +64,15 @@ export default function Menu() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 40,
-    flex: 1,
     position: 'absolute',
     left: 0,
     right: 0,
+    flex: 1,
     backgroundColor: '#000',
+    paddingBottom: 40,
   },
   closeButton: {
-    paddingVertical: 10,
     alignItems: 'center',
+    paddingVertical: 10,
   },
 });

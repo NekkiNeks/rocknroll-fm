@@ -1,12 +1,12 @@
 import React from 'react';
 import {useGlobalContext} from './context';
 import {
-  Dimensions,
   View,
-  Image,
   Text,
-  StyleSheet,
   TouchableOpacity,
+  StyleSheet,
+  Image,
+  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -29,7 +29,7 @@ export default function Header() {
           style={styles.link}
           onPress={() =>
             shareMessage(
-              'Вот ссылка на сайт первого мужского радио: https://rnr.fm',
+              'Здесь будет ссылка на приложение, а пока лишь ссылка на сайт: https://rnr.fm',
             )
           }>
           <Icon name={'share'} size={25} color={'#fff'} />

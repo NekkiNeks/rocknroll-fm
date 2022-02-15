@@ -51,8 +51,8 @@ const containerHeight = (maxHeight * 8) / 100;
 
 const styles = StyleSheet.create({
   container: {
-    height: containerHeight,
     flexDirection: 'row',
+    height: containerHeight,
   },
   button: {
     flexGrow: 1,

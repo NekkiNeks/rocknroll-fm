@@ -54,33 +54,6 @@ export function AppProvider({children}) {
     dispatch({});
   }
 
-  function toggleMenu(value) {
-    dispatch({type: 'TOGGLE_MENU', payload: value});
-  }
-
-  function toggleSearchMenu(value) {
-    if (state.showMenu) {
-      dispatch({type: 'TOGGLE_MENU', payload: false});
-    }
-    dispatch({type: 'TOGGLE_SEARCH_MENU', payload: value});
-  }
-
-  function searchSong(serviceName) {
-    if (serviceName === 'spotify') {
-      openUrl(
-        `https://open.spotify.com/search/${state.artist} - ${state.title}`,
-      );
-    } else if (serviceName === 'apple') {
-      openUrl(
-        `https://music.apple.com/ru/search?term=${state.artist} - ${state.title}`,
-      );
-    } else if (serviceName === 'yandex') {
-      openUrl(
-        `https://music.yandex.ru/search?text=${state.artist} - ${state.title}`,
-      );
-    }
-  }
-
   async function playStream() {
     if (state.timeout) {
       clearTimeout(state.timeout);
@@ -120,6 +93,21 @@ export function AppProvider({children}) {
     dispatch({type: 'REFRESH_STATE'});
   }
 
+  function togglePodcastPlaying(value) {
+    dispatch({type: 'TOGGLE_PODCAST_PLAYING', payload: value});
+  }
+
+  function toggleMenu(value) {
+    dispatch({type: 'TOGGLE_MENU', payload: value});
+  }
+
+  function toggleSearchMenu(value) {
+    if (state.showMenu) {
+      dispatch({type: 'TOGGLE_MENU', payload: false});
+    }
+    dispatch({type: 'TOGGLE_SEARCH_MENU', payload: value});
+  }
+
   async function updateTrackInfo(artist, title) {
     if (artist === null) {
       // if this is jingle
@@ -145,8 +133,20 @@ export function AppProvider({children}) {
     }
   }
 
-  function togglePodcastPlaying(value) {
-    dispatch({type: 'TOGGLE_PODCAST_PLAYING', payload: value});
+  function searchSong(serviceName) {
+    if (serviceName === 'spotify') {
+      openUrl(
+        `https://open.spotify.com/search/${state.artist} - ${state.title}`,
+      );
+    } else if (serviceName === 'apple') {
+      openUrl(
+        `https://music.apple.com/ru/search?term=${state.artist} - ${state.title}`,
+      );
+    } else if (serviceName === 'yandex') {
+      openUrl(
+        `https://music.yandex.ru/search?text=${state.artist} - ${state.title}`,
+      );
+    }
   }
 
   // handle events

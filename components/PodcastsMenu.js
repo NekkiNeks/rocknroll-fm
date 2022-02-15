@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#aaa',
+    justifyContent: 'flex-end',
     height: 150,
     padding: 10,
     marginBottom: 10,
     borderRadius: 10,
-    justifyContent: 'flex-end',
   },
   text: {
     fontSize: 22,

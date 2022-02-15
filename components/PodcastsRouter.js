@@ -10,7 +10,7 @@ export default function PodcastsRouter() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerMode: 'float',
+        headerMode: 'screen',
         header: props => <PodcastsStackHeader {...props} />,
       }}>
       <Stack.Screen name="Подкасты" component={PodcastsMenu} />

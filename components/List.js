@@ -14,28 +14,51 @@ export default function List() {
     'https://a6.radioheart.ru/api/json?userlogin=user8046&count=40&api=lasttrack';
   const [trackList, setTrackList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   async function getTracksData() {
-    let responce = await fetch(url);
-    responce = await responce.json();
-    setTrackList(responce);
-    setLoading(false);
+    try {
+      let responce = await fetch(url);
+      responce = await responce.json();
+      setTrackList(responce);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setError(true);
+      console.log(err.message);
+    }
   }
 
   useEffect(() => {
-    getTracksData().then(console.log('fetched'));
+    getTracksData().then(console.log('List of songs has been fetched.'));
   }, [title]);
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Последнее в эфире</Text>
-      {loading ? (
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>Последнее в эфире</Text>
         <View style={styles.loadingContainer}>
           <Text>
             <Spinner />
           </Text>
         </View>
-      ) : (
+      </View>
+    );
+  } else if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>Последнее в эфире</Text>
+        <View style={styles.loadingContainer}>
+          <Text style={styles.errorText}>
+            Проблемы с сервером, попробуйте перезапустить приложение.
+          </Text>
+        </View>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>Последнее в эфире</Text>
         <ScrollView style={styles.scrollContainer} overScrollMode={'never'}>
           {trackList.map(item => {
             if (item.name === "Rock'n'Roll FM") {
@@ -46,16 +69,16 @@ export default function List() {
             );
           })}
         </ScrollView>
-      )}
-    </View>
-  );
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: '10%',
     flex: 1,
     backgroundColor: '#000',
+    paddingHorizontal: '10%',
   },
   scrollContainer: {
     flex: 1,
@@ -72,5 +95,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000',
+  },
+  errorText: {
+    color: '#fff',
+    paddingHorizontal: 20,
+    textAlign: 'center',
   },
 });

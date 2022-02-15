@@ -1,9 +1,5 @@
 function reducer(state, action) {
   switch (action.type) {
-    case 'TEST': {
-      console.log(action.payload);
-      return state;
-    }
     case 'REFRESH_STATE': {
       return {
         ...state,

@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {
-  Dimensions,
-  Image,
+  View,
+  Text,
   TouchableOpacity,
   StyleSheet,
-  Text,
-  View,
+  Image,
+  Dimensions,
 } from 'react-native';
 import {State} from 'react-native-track-player';
 
@@ -99,25 +99,24 @@ const croppedWidth = fullWidth; // REMOVE LATER
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: '#000',
-    flexGrow: 1,
   },
   imageContainer: {
     height: croppedWidth,
   },
   loadingContainer: {
-    height: croppedWidth,
     justifyContent: 'center',
     alignItems: 'center',
+    height: croppedWidth,
   },
   cover: {
-    // flex: 1,
-    width: croppedWidth,
-    height: croppedWidth,
     resizeMode: 'cover',
     marginBottom: 20,
+    width: croppedWidth,
+    height: croppedWidth,
   },
   infoContainer: {
     width: croppedWidth,
@@ -135,19 +134,16 @@ const styles = StyleSheet.create({
   },
   searchButton: {
     position: 'absolute',
-    paddingRight: 20,
     right: 0,
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingRight: 20,
   },
   buttonsContainer: {
     flexGrow: 1,
-    width: fullWidth,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  buttonText: {
-    color: '#fff',
+    width: fullWidth,
   },
 });
