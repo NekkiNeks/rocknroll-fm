@@ -4,7 +4,6 @@ import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
   Capability,
-  useProgress,
 } from 'react-native-track-player';
 import getImageFromRadioHeart from '../functions/getImageFromRadioHeart';
 import streamInfo from './streamInfo';
@@ -23,6 +22,7 @@ const initialState = {
   init: true,
   timeout: null,
   showMenu: false,
+  showSearchMenu: false,
   currentPodcast: null,
   podcastPlaying: true,
 };
@@ -56,6 +56,29 @@ export function AppProvider({children}) {
 
   function toggleMenu(value) {
     dispatch({type: 'TOGGLE_MENU', payload: value});
+  }
+
+  function toggleSearchMenu(value) {
+    if (state.showMenu) {
+      dispatch({type: 'TOGGLE_MENU', payload: false});
+    }
+    dispatch({type: 'TOGGLE_SEARCH_MENU', payload: value});
+  }
+
+  function searchSong(serviceName) {
+    if (serviceName === 'spotify') {
+      openUrl(
+        `https://open.spotify.com/search/results/${state.artist} - ${state.title}`,
+      );
+    } else if (serviceName === 'apple') {
+      openUrl(
+        `https://music.apple.com/ru/search?term=${state.artist} - ${state.title}`,
+      );
+    } else if (serviceName === 'yandex') {
+      openUrl(
+        `https://music.yandex.ru/search?text=${state.artist} - ${state.title}`,
+      );
+    }
   }
 
   async function playStream() {
@@ -192,6 +215,8 @@ export function AppProvider({children}) {
         playStream,
         pauseStream,
         toggleMenu,
+        toggleSearchMenu,
+        searchSong,
         playPodcast,
         openUrl,
         openPhone,

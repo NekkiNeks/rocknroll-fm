@@ -7,6 +7,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {AppProvider} from './components/context';
 import Header from './components/Header';
 import Menu from './components/Menu';
+import SearchMenu from './components/SearchMenu';
 import Navbar from './components/Navbar';
 import Player from './components/Player';
 import List from './components/List';
@@ -30,6 +31,7 @@ function App() {
             <Tab.Screen name="List" component={List} />
           </Tab.Navigator>
           <Menu />
+          <SearchMenu />
         </SafeAreaView>
       </NavigationContainer>
     </AppProvider>

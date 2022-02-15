@@ -41,6 +41,9 @@ function reducer(state, action) {
     case 'TOGGLE_MENU': {
       return {...state, showMenu: action.payload};
     }
+    case 'TOGGLE_SEARCH_MENU': {
+      return {...state, showSearchMenu: action.payload};
+    }
     case 'SET_CURRENT_PODCAST': {
       return {...state, currentPodcast: action.payload};
     }
