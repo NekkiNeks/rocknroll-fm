@@ -2,6 +2,7 @@ import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
 import TrackPlayer, {useProgress} from 'react-native-track-player';
 import Slider from '@react-native-community/slider';
+import {strings} from '../localization/localization';
 
 //components
 import {useGlobalContext} from './context';
@@ -24,7 +25,7 @@ export default function Podcast({
 
   const stringDuration = (duration / 60000).toFixed();
 
-  const messageForShare = `Послушай этот подкаст от Rock'n'Roll FM! \nhttps://anchor.fm${shareLink}`;
+  const messageForShare = `${strings.podcastMessage}https://anchor.fm${shareLink}`;
 
   async function addPodcast() {
     let url = await fetch(`http://192.168.1.37:6666/podcasts/${id}`);

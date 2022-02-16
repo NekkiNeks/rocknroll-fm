@@ -28,11 +28,7 @@ export default function Header() {
       <View>
         <TouchableOpacity
           style={styles.link}
-          onPress={() =>
-            shareMessage(
-              'Здесь будет ссылка на приложение, а пока лишь ссылка на сайт: https://rnr.fm',
-            )
-          }>
+          onPress={() => shareMessage(strings.shareAppMessage)}>
           <Icon name={'share'} size={25} color={'#fff'} />
         </TouchableOpacity>
       </View>

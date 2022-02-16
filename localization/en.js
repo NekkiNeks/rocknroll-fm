@@ -1,8 +1,12 @@
 export default {
-  title: 'FIRST \n MEN RADIO',
+  title: 'FIRST \nMEN RADIO',
   podcasts: 'Podcasts',
   last: 'Last on air',
-  error: 'Server problems, try to reload App.',
+  error:
+    'Server problems, check your internet connection and try to reload App.',
+  podcastMessage: "Check this Rock'n'Roll FM Podcast: \n",
+  shareAppMessage:
+    'Here will be link to app but now its only link to website: https://rnr.fm',
   menu: {
     settings: 'Settings',
     call: 'Call on air',
