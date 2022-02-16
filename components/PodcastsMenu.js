@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, ScrollView} from 'react-native';
 import {strings} from '../localization/localization';
+import {colors, fonts} from './theme';
 
 const localization = strings.podcastsCategories;
 
@@ -34,11 +35,11 @@ export default function PodcastsMenu({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
     paddingHorizontal: 30,
   },
   button: {
-    backgroundColor: '#aaa',
+    backgroundColor: '#aaa', // change later
     justifyContent: 'flex-end',
     height: 150,
     padding: 10,
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 22,
-    color: '#000',
+    fontFamily: fonts.geometrical,
+    color: colors.black,
   },
 });

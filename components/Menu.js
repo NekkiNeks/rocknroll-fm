@@ -3,6 +3,7 @@ import {TouchableOpacity, StyleSheet, Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useGlobalContext} from './context';
 import {strings} from '../localization/localization';
+import {colors} from './theme';
 
 //Components
 import MenuButton from './MenuButton';
@@ -54,7 +55,7 @@ export default function Menu() {
       <TouchableOpacity
         style={styles.closeButton}
         onPress={() => toggleMenu(false)}>
-        <Icon name={'keyboard-arrow-down'} size={30} color={'#fff'} />
+        <Icon name={'keyboard-arrow-down'} size={30} color={colors.white} />
       </TouchableOpacity>
       <MenuButton text={strings.menu.call} onPress={() => openPhone()} />
       <MenuButton
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     left: 0,
     right: 0,
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
     paddingBottom: 40,
   },
   closeButton: {

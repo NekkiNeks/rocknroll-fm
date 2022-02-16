@@ -3,6 +3,7 @@ import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
 import TrackPlayer, {useProgress} from 'react-native-track-player';
 import Slider from '@react-native-community/slider';
 import {strings} from '../localization/localization';
+import {colors, fonts} from './theme';
 
 //components
 import {useGlobalContext} from './context';
@@ -56,7 +57,7 @@ export default function Podcast({
           <TouchableOpacity
             style={styles.shareButton}
             onPress={() => shareMessage(messageForShare)}>
-            <Icon name={'share'} size={20} color={'#999'} />
+            <Icon name={'share'} size={20} color={colors.gray} />
           </TouchableOpacity>
           <View style={styles.playButtonContainer}>
             <Text style={styles.duration}>{stringDuration} мин.</Text>
@@ -67,7 +68,11 @@ export default function Podcast({
                   addPodcast();
                 }
               }}>
-              <Icon name={'play-circle-filled'} size={30} color={'#fff'} />
+              <Icon
+                name={'play-circle-filled'}
+                size={30}
+                color={colors.white}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -106,19 +111,19 @@ function PodcastPlayer() {
         <TouchableOpacity
           style={styles.playerButton}
           onPress={async () => await TrackPlayer.seekTo(position - 30)}>
-          <Icon name={'replay-30'} size={30} color={'#fff'} />
+          <Icon name={'replay-30'} size={30} color={colors.white} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.playerButton} onPress={handlePress}>
           {podcastPlaying ? (
-            <Icon name={'pause'} size={55} color={'#fff'} />
+            <Icon name={'pause'} size={55} color={colors.white} />
           ) : (
-            <Icon name={'play-arrow'} size={55} color={'#fff'} />
+            <Icon name={'play-arrow'} size={55} color={colors.white} />
           )}
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.playerButton}
           onPress={async () => await TrackPlayer.seekTo(position + 30)}>
-          <Icon name={'forward-30'} size={30} color={'#fff'} />
+          <Icon name={'forward-30'} size={30} color={colors.white} />
         </TouchableOpacity>
       </View>
     </View>
@@ -141,9 +146,9 @@ function ProgressBar() {
         value={position}
         minimumValue={0}
         maximumValue={duration}
-        thumbTintColor="#eb7209"
-        minimumTrackTintColor="#eb7209"
-        maximumTrackTintColor="#FFFFFF"
+        thumbTintColor={colors.orange}
+        minimumTrackTintColor={colors.orange}
+        maximumTrackTintColor={colors.white}
         onSlidingComplete={async value => {
           await TrackPlayer.seekTo(value);
         }}
@@ -155,7 +160,7 @@ function ProgressBar() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#111',
+    backgroundColor: colors.darkGray,
     borderRadius: 7,
     marginBottom: 10,
     padding: 15,
@@ -187,15 +192,15 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontSize: 14,
     flex: 1,
-    fontWeight: '600',
+    fontFamily: fonts.regularBold,
   },
   duration: {
     marginRight: 20,
     fontSize: 12,
-    color: '#999',
+    color: colors.lightGray,
   },
   text: {
-    color: '#fff',
+    color: colors.white,
   },
 
   //active
@@ -204,7 +209,8 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
-    color: '#aaa',
+    fontFamily: fonts.regular,
+    color: colors.lightGray,
   },
 
   //player
@@ -235,6 +241,6 @@ const styles = StyleSheet.create({
   progressText: {
     marginHorizontal: 5,
     fontSize: 10,
-    color: '#fff',
+    color: colors.lightGray,
   },
 });

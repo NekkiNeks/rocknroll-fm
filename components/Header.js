@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {colors, fonts} from './theme';
 import {strings} from '../localization/localization';
 
 export default function Header() {
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   container: {
     height: containerHeight,
     flexDirection: 'row',
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
   },
   logoImage: {
     width: containerHeight - 13,
@@ -52,6 +53,8 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     fontSize: 14,
+    lineHeight: 16,
+    fontFamily: fonts.geometrical,
     color: 'rgba(255, 255, 255, 0.3)',
   },
   textContainer: {

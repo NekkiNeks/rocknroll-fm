@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {colors, fonts} from './theme';
 
 export default function PodcastsStackHeader({route, navigation}) {
   return (
@@ -8,7 +9,7 @@ export default function PodcastsStackHeader({route, navigation}) {
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={styles.backButton}>
-        <Icon name="arrow-back-ios" size={25} color={'#fff'} />
+        <Icon name="arrow-back-ios" size={25} color={colors.white} />
       </TouchableOpacity>
       <Text style={styles.text}>{route.name}</Text>
     </View>
@@ -19,14 +20,15 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
     paddingTop: 15,
     paddingBottom: 25,
   },
   text: {
     marginLeft: 10,
-    color: '#fff',
+    color: colors.white,
     fontSize: 20,
+    fontFamily: fonts.geometrical,
   },
   backButton: {
     paddingLeft: 20,

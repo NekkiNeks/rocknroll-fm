@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, ScrollView, View} from 'react-native';
+import {colors, fonts} from './theme';
 
 //components
 import Podcast from './Podcast';
@@ -61,22 +62,23 @@ export default function Podcasts({route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
     paddingHorizontal: '7%',
   },
   scrollContainer: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
   },
   errorText: {
-    color: '#fff',
+    color: colors.white,
     paddingHorizontal: 20,
     textAlign: 'center',
+    fontFamily: fonts.regular,
   },
 });

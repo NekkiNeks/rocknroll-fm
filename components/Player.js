@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {State} from 'react-native-track-player';
+import {colors, fonts} from './theme';
 
 //Components
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -63,7 +64,7 @@ export default function Player() {
             <TouchableOpacity
               onPress={() => toggleSearchMenu(true)}
               style={[styles.searchButton, {height: infoHeight}]}>
-              <Icon name={'search'} size={25} color={'#fff'} />
+              <Icon name={'search'} size={25} color={colors.white} />
             </TouchableOpacity>
           )}
         </View>
@@ -82,10 +83,10 @@ export default function Player() {
             <Icon
               name={'play-arrow'}
               size={firstPlay ? 120 : 60}
-              color={'#fff'}
+              color={colors.white}
             />
           ) : (
-            <Icon name={'pause'} size={60} color={'#fff'} />
+            <Icon name={'pause'} size={60} color={colors.white} />
           )}
         </TouchableOpacity>
       </View>
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
   },
   imageContainer: {
     height: croppedWidth,
@@ -123,12 +124,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   title: {
-    color: '#fff',
+    color: colors.white,
+    fontFamily: fonts.regular,
     fontSize: 17,
     textAlign: 'center',
   },
   artist: {
-    color: '#fff',
+    color: colors.white,
     fontSize: 14,
     textAlign: 'center',
   },

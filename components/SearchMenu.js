@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {TouchableOpacity, StyleSheet, Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useGlobalContext} from './context';
+import {colors, fonts} from './theme';
 
 //Components
 import MenuButton from './MenuButton';
@@ -53,7 +54,7 @@ export default function Menu() {
       <TouchableOpacity
         style={styles.closeButton}
         onPress={() => toggleSearchMenu(false)}>
-        <Icon name={'keyboard-arrow-down'} size={30} color={'#fff'} />
+        <Icon name={'keyboard-arrow-down'} size={30} color={colors.white} />
       </TouchableOpacity>
       <MenuButton text={'Spotify'} onPress={() => searchSong('spotify')} />
       <MenuButton text={'Apple Music'} onPress={() => searchSong('apple')} />
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
     paddingBottom: 40,
   },
   closeButton: {

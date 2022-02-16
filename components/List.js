@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {View, ScrollView, StyleSheet, Text} from 'react-native';
 import {useGlobalContext} from './context';
 import {strings} from '../localization/localization';
+import {colors, fonts} from './theme';
+
 // components
 import ListItem from './ListItem';
 import Spinner from './Spinner';
@@ -77,28 +79,30 @@ export default function List() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
     paddingHorizontal: '10%',
   },
   scrollContainer: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
   },
   header: {
     marginTop: 15,
     marginBottom: 25,
-    color: '#fff',
+    color: colors.white,
     fontSize: 20,
+    fontFamily: fonts.geometrical,
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
   },
   errorText: {
-    color: '#fff',
+    color: colors.white,
     paddingHorizontal: 20,
     textAlign: 'center',
+    fontFamily: fonts.geometrical,
   },
 });
