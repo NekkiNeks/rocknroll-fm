@@ -1,25 +1,32 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, ScrollView} from 'react-native';
+import {strings} from '../localization/localization';
+
+const localization = strings.podcastsCategories;
 
 export default function PodcastsMenu({navigation}) {
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Хедлайнер', {path: 'headliner'})}>
-        <Text style={styles.text}>{'Проект\nХедлайнер'}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Не Шоу', {path: 'neshow'})}>
-        <Text style={styles.text}>Не Шоу</Text>
+        onPress={() =>
+          navigation.navigate(localization.headlinerSimple, {path: 'headliner'})
+        }>
+        <Text style={styles.text}>{localization.headliner}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
-          navigation.navigate('Виниломания', {path: 'vinilomania'})
+          navigation.navigate(localization.neshow, {path: 'neshow'})
         }>
-        <Text style={styles.text}>Виниломания</Text>
+        <Text style={styles.text}>{localization.neshow}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>
+          navigation.navigate(localization.vinilomania, {path: 'vinilomania'})
+        }>
+        <Text style={styles.text}>{localization.vinilomania}</Text>
       </TouchableOpacity>
     </ScrollView>
   );

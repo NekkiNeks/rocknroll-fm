@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {TouchableOpacity, StyleSheet, Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useGlobalContext} from './context';
+import {strings} from '../localization/localization';
 
 //Components
 import MenuButton from './MenuButton';
@@ -55,14 +56,13 @@ export default function Menu() {
         onPress={() => toggleMenu(false)}>
         <Icon name={'keyboard-arrow-down'} size={30} color={'#fff'} />
       </TouchableOpacity>
-      <MenuButton text={'Настройки'} />
-      <MenuButton text={'Позвонить в эфир'} onPress={() => openPhone()} />
+      <MenuButton text={strings.menu.call} onPress={() => openPhone()} />
       <MenuButton
-        text={'Поддержать радиостанцию'}
+        text={strings.menu.donate}
         onPress={() => openUrl('https://rnr.fm')}
       />
       <MenuButton
-        text={'Перейти на сайт'}
+        text={strings.menu.website}
         onPress={() => openUrl('https://rnr.fm')}
       />
     </Animated.View>

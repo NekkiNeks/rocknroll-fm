@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, ScrollView, StyleSheet, Text} from 'react-native';
 import {useGlobalContext} from './context';
-
+import {strings} from '../localization/localization';
 // components
 import ListItem from './ListItem';
 import Spinner from './Spinner';
@@ -36,7 +36,7 @@ export default function List() {
   if (loading) {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Последнее в эфире</Text>
+        <Text style={styles.header}>{strings.last}</Text>
         <View style={styles.loadingContainer}>
           <Text>
             <Spinner />
@@ -47,7 +47,7 @@ export default function List() {
   } else if (error) {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Последнее в эфире</Text>
+        <Text style={styles.header}>{strings.last}</Text>
         <View style={styles.loadingContainer}>
           <Text style={styles.errorText}>
             Проблемы с сервером, попробуйте перезапустить приложение.
@@ -58,7 +58,7 @@ export default function List() {
   } else {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Последнее в эфире</Text>
+        <Text style={styles.header}>{strings.last}</Text>
         <ScrollView style={styles.scrollContainer} overScrollMode={'never'}>
           {trackList.map(item => {
             if (item.name === "Rock'n'Roll FM") {

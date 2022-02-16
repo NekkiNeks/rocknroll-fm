@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {strings} from '../localization/localization';
 
 export default function Header() {
   const {testReducer, shareMessage} = useGlobalContext();
@@ -22,7 +23,7 @@ export default function Header() {
         />
       </TouchableOpacity>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>ПЕРВОЕ {'\n'} МУЖСКОЕ РАДИО</Text>
+        <Text style={styles.text}>{strings.title}</Text>
       </View>
       <View>
         <TouchableOpacity
