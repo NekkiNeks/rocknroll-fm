@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: colors.white,
     fontSize: 20,
-    fontFamily: fonts.geometrical,
+    // fontFamily: fonts.geometrical,
   },
   backButton: {
     paddingLeft: 20,

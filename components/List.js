@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     color: colors.white,
     fontSize: 20,
-    fontFamily: fonts.geometrical,
+    // fontFamily: fonts.geometrical,
   },
   loadingContainer: {
     flex: 1,
@@ -103,6 +103,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     paddingHorizontal: 20,
     textAlign: 'center',
-    fontFamily: fonts.geometrical,
+    // fontFamily: fonts.geometrical,
   },
 });

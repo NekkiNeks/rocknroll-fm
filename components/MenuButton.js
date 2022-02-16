@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    fontFamily: fonts.geometrical,
+    // fontFamily: fonts.geometrical,
     color: colors.white,
   },
 });

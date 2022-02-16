@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {TouchableOpacity, StyleSheet, Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useGlobalContext} from './context';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 
 //Components
 import MenuButton from './MenuButton';

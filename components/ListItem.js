@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
-    fontFamily: fonts.regular,
+    // fontFamily: fonts.regular,
   },
   title: {
     fontSize: 15,

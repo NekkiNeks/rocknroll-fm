@@ -125,12 +125,13 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.white,
-    fontFamily: fonts.regular,
+    // fontFamily: fonts.regular,
     fontSize: 17,
     textAlign: 'center',
   },
   artist: {
     color: colors.white,
+    // fontFamily: fonts.regular,
     fontSize: 14,
     textAlign: 'center',
   },

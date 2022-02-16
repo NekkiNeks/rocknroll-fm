@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     fontSize: 14,
-    lineHeight: 16,
-    fontFamily: fonts.geometrical,
+    lineHeight: 18,
+    // fontFamily: fonts.geometrical,
     color: 'rgba(255, 255, 255, 0.3)',
   },
   textContainer: {

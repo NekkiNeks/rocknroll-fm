@@ -79,6 +79,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     paddingHorizontal: 20,
     textAlign: 'center',
-    fontFamily: fonts.regular,
+    // fontFamily: fonts.regular,
   },
 });

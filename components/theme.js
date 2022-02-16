@@ -10,5 +10,5 @@ export const colors = {
 export const fonts = {
   regular: 'Roboto-Regular',
   regularBold: 'Roboto-Bold',
-  geometrical: 'Jost-Regular',
+  geometrical: 'Jost-Medium',
 };

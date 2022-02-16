@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    fontSize: 22,
-    fontFamily: fonts.geometrical,
+    fontSize: 26,
+    // fontFamily: fonts.geometrical,
     color: colors.black,
   },
 });

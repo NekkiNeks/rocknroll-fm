@@ -192,7 +192,8 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontSize: 14,
     flex: 1,
-    fontFamily: fonts.regularBold,
+    fontWeight: 'bold',
+    // fontFamily: fonts.regularBold,
   },
   duration: {
     marginRight: 20,
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
-    fontFamily: fonts.regular,
+    // fontFamily: fonts.regular,
     color: colors.lightGray,
   },
 
