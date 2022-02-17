@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, ScrollView} from 'react-native';
 import {strings} from '../localization/localization';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 
 const localization = strings.podcastsCategories;
 
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 26,
-    // fontFamily: fonts.geometrical,
     color: colors.black,
   },
 });

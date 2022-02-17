@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 
 export default function ListItem({name, time}) {
   const [artist, title] = name.split(' - ');
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
-    // fontFamily: fonts.regular,
   },
   title: {
     fontSize: 15,

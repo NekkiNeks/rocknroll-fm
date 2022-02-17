@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, ScrollView, View} from 'react-native';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 
 //components
 import Podcast from './Podcast';
@@ -79,6 +79,5 @@ const styles = StyleSheet.create({
     color: colors.white,
     paddingHorizontal: 20,
     textAlign: 'center',
-    // fontFamily: fonts.regular,
   },
 });

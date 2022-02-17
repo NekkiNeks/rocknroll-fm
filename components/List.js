@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, ScrollView, StyleSheet, Text} from 'react-native';
 import {useGlobalContext} from './context';
 import {strings} from '../localization/localization';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 
 // components
 import ListItem from './ListItem';
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     color: colors.white,
     fontSize: 20,
-    // fontFamily: fonts.geometrical,
   },
   loadingContainer: {
     flex: 1,
@@ -103,6 +102,5 @@ const styles = StyleSheet.create({
     color: colors.white,
     paddingHorizontal: 20,
     textAlign: 'center',
-    // fontFamily: fonts.geometrical,
   },
 });

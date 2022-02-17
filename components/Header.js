@@ -9,7 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 import {strings} from '../localization/localization';
 
 export default function Header() {
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     lineHeight: 18,
-    // fontFamily: fonts.geometrical,
     color: 'rgba(255, 255, 255, 0.3)',
   },
   textContainer: {

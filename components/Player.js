@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {State} from 'react-native-track-player';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 
 //Components
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -125,13 +125,11 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.white,
-    // fontFamily: fonts.regular,
     fontSize: 17,
     textAlign: 'center',
   },
   artist: {
     color: colors.white,
-    // fontFamily: fonts.regular,
     fontSize: 14,
     textAlign: 'center',
   },

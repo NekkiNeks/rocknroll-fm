@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 
 export default function MenuButton({text, onPress}) {
   return (
@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    // fontFamily: fonts.geometrical,
     color: colors.white,
   },
 });

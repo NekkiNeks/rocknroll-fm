@@ -3,7 +3,7 @@ import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
 import TrackPlayer, {useProgress} from 'react-native-track-player';
 import Slider from '@react-native-community/slider';
 import {strings} from '../localization/localization';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 
 //components
 import {useGlobalContext} from './context';
@@ -193,7 +193,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     flex: 1,
     fontWeight: 'bold',
-    // fontFamily: fonts.regularBold,
   },
   duration: {
     marginRight: 20,
@@ -210,7 +209,6 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
-    // fontFamily: fonts.regular,
     color: colors.lightGray,
   },
 

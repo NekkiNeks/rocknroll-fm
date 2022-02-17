@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useReducer} from 'react';
-import {Linking, Share} from 'react-native';
+import {Linking, Platform, Share} from 'react-native';
 import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
@@ -139,9 +139,14 @@ export function AppProvider({children}) {
         `https://open.spotify.com/search/${state.artist} - ${state.title}`,
       );
     } else if (serviceName === 'apple') {
-      openUrl(
-        `https://music.apple.com/ru/search?term=${state.artist} - ${state.title}`,
-      );
+      // idk how to resolve it so here is a mess...
+      if (Platform.OS === 'ios') {
+        openUrl('music://music.apple.com/search');
+      } else {
+        openUrl(
+          `https://music.apple.com/ru/search?term=${state.artist} - ${state.title}`,
+        );
+      }
     } else if (serviceName === 'yandex') {
       openUrl(
         `https://music.yandex.ru/search?text=${state.artist} - ${state.title}`,

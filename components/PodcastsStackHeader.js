@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {colors, fonts} from './theme';
+import {colors} from './theme';
 
 export default function PodcastsStackHeader({route, navigation}) {
   return (
@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: colors.white,
     fontSize: 20,
-    // fontFamily: fonts.geometrical,
   },
   backButton: {
     paddingLeft: 20,
