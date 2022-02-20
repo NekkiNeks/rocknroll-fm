@@ -89,6 +89,7 @@ export function AppProvider({children}) {
     dispatch({type: 'SET_CURRENT_PODCAST', payload: id});
     await TrackPlayer.add(podcast);
     TrackPlayer.play();
+    dispatch({type: 'TOGGLE_PODCAST_PLAYING', payload: true});
     dispatch({type: 'PLAYER_MODE_TOGGLE', payload: 'podcast'});
     dispatch({type: 'REFRESH_STATE'});
   }
