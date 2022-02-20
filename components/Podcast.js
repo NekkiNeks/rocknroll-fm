@@ -238,7 +238,10 @@ const styles = StyleSheet.create({
     height: 40,
   },
   progressText: {
-    marginHorizontal: 5,
+    width: 35,
+    // marginHorizontal: 5,
+    // backgroundColor: 'tomato',
+    textAlign: 'center',
     fontSize: 10,
     color: colors.lightGray,
   },

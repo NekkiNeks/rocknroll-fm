@@ -31,6 +31,8 @@ export default function List() {
     }
   }
 
+  let trackId = 0;
+
   useEffect(() => {
     getTracksData().then(console.log('List of songs has been fetched.'));
   }, [title]);
@@ -51,9 +53,7 @@ export default function List() {
       <View style={styles.container}>
         <Text style={styles.header}>{strings.last}</Text>
         <View style={styles.loadingContainer}>
-          <Text style={styles.errorText}>
-            Проблемы с сервером, попробуйте перезапустить приложение.
-          </Text>
+          <Text style={styles.errorText}>{strings.error}</Text>
         </View>
       </View>
     );
@@ -66,9 +66,8 @@ export default function List() {
             if (item.name === "Rock'n'Roll FM") {
               return null;
             }
-            return (
-              <ListItem key={item.name} name={item.name} time={item.time} />
-            );
+            trackId++;
+            return <ListItem key={trackId} name={item.name} time={item.time} />;
           })}
         </ScrollView>
       </View>

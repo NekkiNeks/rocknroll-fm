@@ -5,6 +5,7 @@ import {colors} from './theme';
 //components
 import Podcast from './Podcast';
 import Spinner from './Spinner';
+import {strings} from '../localization/localization';
 
 export default function Podcasts({route}) {
   const {path} = route.params;
@@ -21,7 +22,7 @@ export default function Podcasts({route}) {
     } catch (err) {
       setLoading(false);
       setError(true);
-      console.warn(err.message);
+      console.log(err.message);
     }
   }
 
@@ -41,10 +42,7 @@ export default function Podcasts({route}) {
   } else if (error) {
     return (
       <View style={styles.loadingContainer}>
-        <Text style={styles.errorText}>
-          Проблемы с сервером, проверьте свое подключение к интернету и
-          попробуйте перезапустить приложение.
-        </Text>
+        <Text style={styles.errorText}>{strings.error}</Text>
       </View>
     );
   } else {

@@ -156,8 +156,10 @@ export function AppProvider({children}) {
 
   // handle events
   useTrackPlayerEvents([Event.PlaybackMetadataReceived], async e => {
+    const title = e.title.length > 30 ? e.title.slice(0, 30) + '...' : e.title;
+    const artist = e.artist;
     console.log('now playing:', e.artist, e.title);
-    updateTrackInfo(e.artist, e.title);
+    updateTrackInfo(artist, title);
   });
 
   useTrackPlayerEvents([Event.RemotePlay], async e => {

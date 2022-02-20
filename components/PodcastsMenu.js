@@ -20,7 +20,7 @@ export default function PodcastsMenu({navigation}) {
           navigation.navigate(localization.headlinerSimple, {path: 'headliner'})
         }>
         <Image
-          source={require('../assets/podcast-background-bw.jpg')}
+          source={require('../assets/podcast-background.jpg')}
           style={styles.backgroundImage}
         />
         <Text style={styles.text}>{localization.headliner}</Text>
@@ -31,7 +31,7 @@ export default function PodcastsMenu({navigation}) {
           navigation.navigate(localization.neshow, {path: 'neshow'})
         }>
         <Image
-          source={require('../assets/podcast-background-bw.jpg')}
+          source={require('../assets/podcast-background.jpg')}
           style={styles.backgroundImage}
         />
         <Text style={styles.text}>{localization.neshow}</Text>
@@ -42,7 +42,7 @@ export default function PodcastsMenu({navigation}) {
           navigation.navigate(localization.vinilomania, {path: 'vinilomania'})
         }>
         <Image
-          source={require('../assets/podcast-background-bw.jpg')}
+          source={require('../assets/podcast-background.jpg')}
           style={styles.backgroundImage}
         />
         <Text style={styles.text}>{localization.vinilomania}</Text>

@@ -3,7 +3,8 @@ import {View, Text, StyleSheet} from 'react-native';
 import {colors} from './theme';
 
 export default function ListItem({name, time}) {
-  const [artist, title] = name.split(' - ');
+  let [artist, title] = name.split(' - ');
+  title = title.length > 30 ? title.slice(0, 30) + '...' : title;
   return (
     <View style={styles.container}>
       <View>
