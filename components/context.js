@@ -32,6 +32,8 @@ export function AppProvider({children}) {
   async function setupPlayer() {
     await TrackPlayer.setupPlayer({
       waitForBuffer: true,
+      minBuffer: 15,
+      maxBuffer: 60,
       playBuffer: 0.5,
     });
     // Player options

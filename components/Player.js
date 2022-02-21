@@ -37,26 +37,50 @@ export default function Player() {
       playerState === 'buffering' ||
       playerState === 'loading');
 
-  return (
-    <View style={styles.container}>
-      {/* Image container */}
-      {isLoading ? (
+  if (firstPlay) {
+    return (
+      <View style={styles.container}>
+        {/* logo section */}
+        <View style={styles.imageContainer}>
+          <Image source={require('../assets/logo.jpg')} style={styles.cover} />
+        </View>
+
+        {/* button section */}
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity onPress={() => playStream()}>
+            <Icon name={'play-arrow'} size={120} color={colors.white} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  } else if (isLoading) {
+    return (
+      <View style={styles.container}>
+        {/* loading spinner */}
         <View style={styles.loadingContainer}>
           <Text>
             <Spinner />
           </Text>
         </View>
-      ) : (
+
+        {/* info section */}
+        <View style={styles.buttonsContainer}>
+          <Text>Loading...</Text>
+        </View>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        {/* cover section */}
         <View style={styles.imageContainer}>
           <Image
-            source={cover ? {uri: cover} : require('../assets/logo.jpg')}
+            source={cover ? {uri: cover} : require('../assets/placeholder.jpg')}
             style={styles.cover}
           />
         </View>
-      )}
 
-      {/* info container */}
-      {!firstPlay && (
+        {/* info section */}
         <View style={styles.infoContainer} onLayout={getInfoHeight}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.artist}>{artist}</Text>
@@ -68,35 +92,84 @@ export default function Player() {
             </TouchableOpacity>
           )}
         </View>
-      )}
 
-      {/* buttons container */}
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            if (!isPlaying) {
-              return playStream();
-            }
-            return pauseStream();
-          }}>
-          {!isPlaying ? (
+        {/* buttons container */}
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              isPlaying ? pauseStream() : playStream();
+            }}>
             <Icon
-              name={'play-arrow'}
-              size={firstPlay ? 120 : 60}
+              name={isPlaying ? 'pause' : 'play-arrow'}
+              size={60}
               color={colors.white}
             />
-          ) : (
-            <Icon name={'pause'} size={60} color={colors.white} />
-          )}
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
+
+  // return (
+  //   <View style={styles.container}>
+  //     {/* Image container */}
+  //     {isLoading ? (
+  //       <View style={styles.loadingContainer}>
+  //         <Text>
+  //           <Spinner />
+  //         </Text>
+  //       </View>
+  //     ) : (
+  //       <View style={styles.imageContainer}>
+  //         <Image
+  //           source={cover ? {uri: cover} : require('../assets/logo.jpg')}
+  //           style={styles.cover}
+  //         />
+  //       </View>
+  //     )}
+
+  //     {/* info container */}
+  //     {!firstPlay && (
+  //       <View style={styles.infoContainer} onLayout={getInfoHeight}>
+  //         <Text style={styles.title}>{title}</Text>
+  //         <Text style={styles.artist}>{artist}</Text>
+  //         {title && artist && (
+  //           <TouchableOpacity
+  //             onPress={() => toggleSearchMenu(true)}
+  //             style={[styles.searchButton, {height: infoHeight}]}>
+  //             <Icon name={'search'} size={25} color={colors.white} />
+  //           </TouchableOpacity>
+  //         )}
+  //       </View>
+  //     )}
+
+  //     {/* buttons container */}
+  //     <View style={styles.buttonsContainer}>
+  //       <TouchableOpacity
+  //         onPress={() => {
+  //           if (!isPlaying) {
+  //             return playStream();
+  //           }
+  //           return pauseStream();
+  //         }}>
+  //         {!isPlaying ? (
+  //           <Icon
+  //             name={'play-arrow'}
+  //             size={firstPlay ? 120 : 60}
+  //             color={colors.white}
+  //           />
+  //         ) : (
+  //           <Icon name={'pause'} size={60} color={colors.white} />
+  //         )}
+  //       </TouchableOpacity>
+  //     </View>
+  //   </View>
+  // );
 }
 
 //Get width of phone
 const fullWidth = Dimensions.get('window').width; //full width
-const croppedWidth = fullWidth; // REMOVE LATER
+const croppedWidth = fullWidth - 50; // REMOVE LATER
 
 const styles = StyleSheet.create({
   container: {
@@ -120,7 +193,7 @@ const styles = StyleSheet.create({
     height: croppedWidth,
   },
   infoContainer: {
-    width: croppedWidth,
+    width: fullWidth - 20,
     marginTop: 20,
   },
   title: {

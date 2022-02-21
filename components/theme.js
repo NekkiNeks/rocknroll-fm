@@ -7,8 +7,8 @@ export const colors = {
   lightGray: '#aaaaaa',
 };
 
-export const fonts = {
-  regular: 'Roboto-Regular',
-  regularBold: 'Roboto-Bold',
-  geometrical: 'Jost-Medium',
-};
+// export const fonts = {
+//   regular: 'Roboto-Regular',
+//   regularBold: 'Roboto-Bold',
+//   geometrical: 'Jost-Medium',
+// };
