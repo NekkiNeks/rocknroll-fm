@@ -19,6 +19,7 @@
     "react-native-localization": "^2.2.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.2",
+    "react-native-swift": "^1.2.3",
     "react-native-track-player": "^2.1.2",
     "react-native-vector-icons": "^9.0.0"
   },
