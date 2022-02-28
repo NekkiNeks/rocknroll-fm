@@ -209,7 +209,7 @@ export function AppProvider({children}) {
   }
 
   function openPhone() {
-    const link = 'tel://+79996377097';
+    const link = 'tel://+79996311999';
     Linking.openURL(link).catch(err => console.error('sorry i cant', err));
   }
 

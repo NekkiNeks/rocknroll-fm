@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
+  View,
   TouchableOpacity,
   StyleSheet,
   Image,
@@ -9,46 +10,66 @@ import {
 import {strings} from '../localization/localization';
 import {colors} from './theme';
 
+import Spinner from './Spinner';
+
 const localization = strings.podcastsCategories;
 
 export default function PodcastsMenu({navigation}) {
-  return (
-    <ScrollView style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate(localization.headlinerSimple, {path: 'headliner'})
-        }>
-        <Image
-          source={require('../assets/podcast-background.jpg')}
-          style={styles.backgroundImage}
-        />
-        <Text style={styles.text}>{localization.headliner}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate(localization.neshow, {path: 'neshow'})
-        }>
-        <Image
-          source={require('../assets/podcast-background.jpg')}
-          style={styles.backgroundImage}
-        />
-        <Text style={styles.text}>{localization.neshow}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate(localization.vinilomania, {path: 'vinilomania'})
-        }>
-        <Image
-          source={require('../assets/podcast-background.jpg')}
-          style={styles.backgroundImage}
-        />
-        <Text style={styles.text}>{localization.vinilomania}</Text>
-      </TouchableOpacity>
-    </ScrollView>
-  );
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  async function getImage() {
+    const imageSource = await require('../assets/podcast-background.jpg');
+    setImage(imageSource);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    getImage();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>
+          <Spinner />;
+        </Text>
+      </View>
+    );
+  }
+
+  if (!loading) {
+    return (
+      <ScrollView style={styles.container}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate(localization.headlinerSimple, {
+              path: 'headliner',
+            })
+          }>
+          <Image source={image} style={styles.backgroundImage} />
+          <Text style={styles.text}>{localization.headliner}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate(localization.neshow, {path: 'neshow'})
+          }>
+          <Image source={image} style={styles.backgroundImage} />
+          <Text style={styles.text}>{localization.neshow}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate(localization.vinilomania, {path: 'vinilomania'})
+          }>
+          <Image source={image} style={styles.backgroundImage} />
+          <Text style={styles.text}>{localization.vinilomania}</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

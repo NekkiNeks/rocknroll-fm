@@ -30,7 +30,7 @@ export default function Header() {
         <TouchableOpacity
           style={styles.link}
           onPress={() => shareMessage(strings.shareAppMessage)}>
-          <Icon name={'share'} size={25} color={'#fff'} />
+          <Icon name={'share'} size={30} color={'#fff'} />
         </TouchableOpacity>
       </View>
     </View>
