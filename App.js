@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, SafeAreaView, StatusBar} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 //import components
@@ -16,6 +16,15 @@ import PodcastsMenu from './components/PodcastsRouter';
 //import variables
 import {colors} from './components/theme';
 
+// Fix for flickering on tab change
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: '#000',
+  },
+};
+
 //code
 function App() {
   const Tab = createBottomTabNavigator();
@@ -23,7 +32,7 @@ function App() {
   return (
     <AppProvider>
       <StatusBar barStyle="light-content" />
-      <NavigationContainer>
+      <NavigationContainer theme={MyTheme}>
         <SafeAreaView style={styles.mainContainer}>
           <Header />
           <Tab.Navigator
