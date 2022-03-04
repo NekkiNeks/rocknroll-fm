@@ -65,7 +65,7 @@ export default function Player() {
 
         {/* info section */}
         <View style={styles.buttonsContainer}>
-          <Text>Loading...</Text>
+          <Text style={styles.title}>Loading...</Text>
         </View>
       </View>
     );
