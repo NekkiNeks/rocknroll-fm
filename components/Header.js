@@ -13,11 +13,13 @@ import {colors} from './theme';
 import {strings} from '../localization/localization';
 
 export default function Header() {
-  const {testReducer, shareMessage} = useGlobalContext();
+  const {openUrl, shareMessage} = useGlobalContext();
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.link} onPress={testReducer}>
+      <TouchableOpacity
+        style={styles.link}
+        onPress={() => openUrl('https://rnr.fm')}>
         <Image
           source={require('../assets/logo.jpg')}
           style={styles.logoImage}
@@ -30,7 +32,7 @@ export default function Header() {
         <TouchableOpacity
           style={styles.link}
           onPress={() => shareMessage(strings.shareAppMessage)}>
-          <Icon name={'share'} size={30} color={'#fff'} />
+          <Icon name={'share'} size={30} color={colors.white} />
         </TouchableOpacity>
       </View>
     </View>

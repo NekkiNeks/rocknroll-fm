@@ -29,7 +29,7 @@ export default function Podcast({
   const messageForShare = `${strings.podcastMessage}https://anchor.fm${shareLink}`;
 
   async function addPodcast() {
-    let url = await fetch(`http://192.168.1.37:6666/podcasts/${id}`);
+    let url = await fetch(`http://podcast.rnr.fm/podcasts/${id}`);
     url = await url.json();
     const Track = {
       url: url, // Load media from the network

@@ -13,6 +13,9 @@ import Player from './components/Player';
 import List from './components/List';
 import PodcastsMenu from './components/PodcastsRouter';
 
+//import variables
+import {colors} from './components/theme';
+
 //code
 function App() {
   const Tab = createBottomTabNavigator();
@@ -42,7 +45,7 @@ console.log('everything works!');
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
     height: '100%',
   },
 });

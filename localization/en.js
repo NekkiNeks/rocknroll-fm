@@ -16,7 +16,7 @@ export default {
   podcastsCategories: {
     headliner: 'Project \nHeadliner',
     headlinerSimple: 'Headliner',
-    neshow: 'Not Show',
+    neshow: 'Not a show',
     vinilomania: 'Vinilomania',
   },
 };

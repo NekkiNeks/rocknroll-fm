@@ -60,7 +60,7 @@ export default function Menu() {
       <MenuButton text={strings.menu.call} onPress={() => openPhone()} />
       <MenuButton
         text={strings.menu.donate}
-        onPress={() => openUrl('https://rnr.fm')}
+        onPress={() => openUrl('https://rnr.fm/donate')}
       />
       <MenuButton
         text={strings.menu.website}

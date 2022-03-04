@@ -58,7 +58,6 @@ export default function Menu() {
       </TouchableOpacity>
       <MenuButton text={'Spotify'} onPress={() => searchSong('spotify')} />
       <MenuButton text={'Apple Music'} onPress={() => searchSong('apple')} />
-      <MenuButton text={'Яндекс.Музыка'} onPress={() => searchSong('yandex')} />
     </Animated.View>
   );
 }

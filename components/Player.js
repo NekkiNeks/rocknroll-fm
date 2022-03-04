@@ -48,7 +48,7 @@ export default function Player() {
         {/* button section */}
         <View style={styles.buttonsContainer}>
           <TouchableOpacity onPress={() => playStream()}>
-            <Icon name={'play-arrow'} size={120} color={colors.white} />
+            <Icon name={'play-arrow'} size={140} color={colors.white} />
           </TouchableOpacity>
         </View>
       </View>
@@ -101,7 +101,7 @@ export default function Player() {
             }}>
             <Icon
               name={isPlaying ? 'pause' : 'play-arrow'}
-              size={60}
+              size={70}
               color={colors.white}
             />
           </TouchableOpacity>

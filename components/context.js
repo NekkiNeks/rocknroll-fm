@@ -137,23 +137,24 @@ export function AppProvider({children}) {
   }
 
   function searchSong(serviceName) {
-    if (serviceName === 'spotify') {
-      openUrl(
-        `https://open.spotify.com/search/${state.artist} - ${state.title}`,
-      );
-    } else if (serviceName === 'apple') {
-      // idk how to resolve it so here is a mess...
-      if (Platform.OS === 'ios') {
-        openUrl('music://music.apple.com/search');
-      } else {
-        openUrl(
-          `https://music.apple.com/ru/search?term=${state.artist} - ${state.title}`,
+    switch (serviceName) {
+      case 'spotify': {
+        return openUrl(
+          `https://open.spotify.com/search/${state.artist} - ${state.title}`,
         );
       }
-    } else if (serviceName === 'yandex') {
-      openUrl(
-        `https://music.yandex.ru/search?text=${state.artist} - ${state.title}`,
-      );
+      case 'apple': {
+        if (Platform.OS === 'ios') {
+          return openUrl('music://music.apple.com/search');
+        } else {
+          return openUrl(
+            `https://music.apple.com/ru/search?term=${state.artist} - ${state.title}`,
+          );
+        }
+      }
+      default:
+        console.log('Err! Unknown service.');
+        break;
     }
   }
 
