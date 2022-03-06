@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useReducer} from 'react';
-import {Linking, Platform, Share} from 'react-native';
+import {Linking, Share} from 'react-native';
 import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
@@ -144,11 +144,16 @@ export function AppProvider({children}) {
         );
       }
       case 'apple': {
-        let responce = await fetch(
-          `http://podcast.rnr.fm/searchSong/${state.artist} - ${state.title}`,
-        );
-        responce = await responce.json();
-        return openUrl(responce);
+        try {
+          let responce = await fetch(
+            `http://podcast.rnr.fm/searchSong/${state.artist} - ${state.title}`,
+          );
+          responce = await responce.json();
+          return openUrl(responce);
+        } catch (e) {
+          console.log(e.message);
+          return openUrl('https://music.apple.com/search');
+        }
       }
       default:
         console.log('Err! Unknown service.');

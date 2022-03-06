@@ -56,8 +56,20 @@ export default function Menu() {
         onPress={() => toggleSearchMenu(false)}>
         <Icon name={'keyboard-arrow-down'} size={30} color={colors.white} />
       </TouchableOpacity>
-      <MenuButton text={'Spotify'} onPress={() => searchSong('spotify')} />
-      <MenuButton text={'Apple Music'} onPress={() => searchSong('apple')} />
+      <MenuButton
+        text={'Spotify'}
+        onPress={() => {
+          searchSong('spotify');
+          toggleSearchMenu(false);
+        }}
+      />
+      <MenuButton
+        text={'Apple Music'}
+        onPress={() => {
+          searchSong('apple');
+          toggleSearchMenu(false);
+        }}
+      />
     </Animated.View>
   );
 }

@@ -57,14 +57,26 @@ export default function Menu() {
         onPress={() => toggleMenu(false)}>
         <Icon name={'keyboard-arrow-down'} size={30} color={colors.white} />
       </TouchableOpacity>
-      <MenuButton text={strings.menu.call} onPress={() => openPhone()} />
+      <MenuButton
+        text={strings.menu.call}
+        onPress={() => {
+          openPhone();
+          toggleMenu(false);
+        }}
+      />
       <MenuButton
         text={strings.menu.donate}
-        onPress={() => openUrl('https://rnr.fm/donate')}
+        onPress={() => {
+          openUrl('https://rnr.fm/donate');
+          toggleMenu(false);
+        }}
       />
       <MenuButton
         text={strings.menu.website}
-        onPress={() => openUrl('https://rnr.fm')}
+        onPress={() => {
+          openUrl('https://rnr.fm');
+          toggleMenu(false);
+        }}
       />
     </Animated.View>
   );

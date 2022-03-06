@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {State} from 'react-native-track-player';
 import {colors} from './theme';
+import {strings} from '../localization/localization';
 
 //Components
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -65,7 +66,7 @@ export default function Player() {
 
         {/* info section */}
         <View style={styles.buttonsContainer}>
-          <Text style={styles.title}>Loading...</Text>
+          <Text style={styles.title}>{strings.loading}</Text>
         </View>
       </View>
     );
