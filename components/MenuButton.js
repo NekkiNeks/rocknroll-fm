@@ -13,9 +13,9 @@ export default function MenuButton({text, onPress}) {
 const styles = StyleSheet.create({
   button: {
     padding: 10,
-    paddingLeft: 50,
   },
   text: {
+    textAlign: 'center',
     fontSize: 18,
     color: colors.white,
   },
