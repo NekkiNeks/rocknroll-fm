@@ -144,17 +144,11 @@ export function AppProvider({children}) {
         );
       }
       case 'apple': {
-        if (Platform.OS === 'ios') {
-          let responce = await fetch(
-            `192.168.1.37:6666/searchSong/${state.artist} - ${state.title}`,
-          );
-          responce = await responce.json();
-          return openUrl(responce);
-        } else {
-          return openUrl(
-            `https://music.apple.com/ru/search?term=${state.artist} - ${state.title}`,
-          );
-        }
+        let responce = await fetch(
+          `http://podcast.rnr.fm/searchSong/${state.artist} - ${state.title}`,
+        );
+        responce = await responce.json();
+        return openUrl(responce);
       }
       default:
         console.log('Err! Unknown service.');
