@@ -1,7 +1,7 @@
 export default {
   title: 'FIRST \nMEN RADIO',
   podcasts: 'Podcasts',
-  last: 'Last on air',
+  last: 'Previous on air',
   error:
     'Server problems, check your internet connection and try to reload App.',
   podcastMessage: "Check this Rock'n'Roll FM Podcast: \n",

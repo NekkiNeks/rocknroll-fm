@@ -1,4 +1,5 @@
 export const colors = {
+  menubg: 'rgba(0, 0, 0, 0.9)',
   white: '#ffffff',
   black: '#000000',
   orange: '#eb7209',

@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     left: 0,
     right: 0,
-    backgroundColor: colors.black,
+    backgroundColor: colors.menubg,
     paddingBottom: 40,
   },
   closeButton: {

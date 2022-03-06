@@ -30,6 +30,8 @@ local.properties
 *.iml
 *.hprof
 
+app-release.aab
+
 # node.js
 #
 node_modules/
