@@ -136,7 +136,7 @@ export function AppProvider({children}) {
     }
   }
 
-  function searchSong(serviceName) {
+  async function searchSong(serviceName) {
     switch (serviceName) {
       case 'spotify': {
         return openUrl(
@@ -145,7 +145,11 @@ export function AppProvider({children}) {
       }
       case 'apple': {
         if (Platform.OS === 'ios') {
-          return openUrl('music://music.apple.com/search');
+          let responce = await fetch(
+            `192.168.1.37:6666/searchSong/${state.artist} - ${state.title}`,
+          );
+          responce = await responce.json();
+          return openUrl(responce);
         } else {
           return openUrl(
             `https://music.apple.com/ru/search?term=${state.artist} - ${state.title}`,
