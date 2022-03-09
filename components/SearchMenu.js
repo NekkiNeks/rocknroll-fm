@@ -70,6 +70,13 @@ export default function Menu() {
           toggleSearchMenu(false);
         }}
       />
+      <MenuButton
+        text={'VK'}
+        onPress={() => {
+          searchSong('vk');
+          toggleSearchMenu(false);
+        }}
+      />
     </Animated.View>
   );
 }

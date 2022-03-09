@@ -143,6 +143,11 @@ export function AppProvider({children}) {
           `https://open.spotify.com/search/${state.artist} - ${state.title}`,
         );
       }
+      case 'vk': {
+        return openUrl(
+          `https://vk.com/search?c%5Bsection%5D=audio&c%5Bq%5D=${state.artist} - ${state.title}`,
+        );
+      }
       case 'apple': {
         try {
           let responce = await fetch(
