@@ -155,6 +155,11 @@ export function AppProvider({children}) {
           return openUrl('https://music.apple.com/search');
         }
       }
+      case 'yandex': {
+        return openUrl(
+          `https://music.yandex.ru/search?text=${state.artist} - ${state.title}`,
+        );
+      }
       default:
         console.log('Err! Unknown service.');
         break;
