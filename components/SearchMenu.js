@@ -14,7 +14,8 @@ import {colors} from './theme';
 import MenuButton from './MenuButton';
 
 export default function Menu() {
-  const {state, toggleSearchMenu, searchSong} = useGlobalContext();
+  const {state, toggleSearchMenu, searchSong, updateSearchQueue} =
+    useGlobalContext();
   const {showSearchMenu} = state;
 
   const [menuHeight, setMenuHeight] = useState(0);
@@ -46,7 +47,10 @@ export default function Menu() {
       {showSearchMenu && (
         <TouchableOpacity
           style={styles.closeView}
-          onPress={() => toggleSearchMenu(false)}
+          onPress={() => {
+            toggleSearchMenu(false);
+            updateSearchQueue(null);
+          }}
         />
       )}
       <Animated.View
@@ -66,7 +70,10 @@ export default function Menu() {
         onLayout={getMenuHeight}>
         <TouchableOpacity
           style={styles.closeButton}
-          onPress={() => toggleSearchMenu(false)}>
+          onPress={() => {
+            toggleSearchMenu(false);
+            updateSearchQueue(null);
+          }}>
           <Icon name={'keyboard-arrow-down'} size={30} color={colors.white} />
         </TouchableOpacity>
         <MenuButton

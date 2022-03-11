@@ -19,7 +19,9 @@ export default function Header() {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.link}
-        onPress={() => openUrl('https://rnr.fm')}>
+        onPress={() => {
+          openUrl('https://rnr.fm');
+        }}>
         <Image
           source={require('../assets/logo.jpg')}
           style={styles.logoImage}

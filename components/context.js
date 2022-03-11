@@ -23,6 +23,7 @@ const initialState = {
   timeout: null,
   showMenu: false,
   showSearchMenu: false,
+  searchQueue: null,
   currentPodcast: null,
   podcastPlaying: true,
 };
@@ -136,17 +137,19 @@ export function AppProvider({children}) {
     }
   }
 
+  function updateSearchQueue(value) {
+    dispatch({type: 'UPDATE_SEARCH_QUEUE', payload: value});
+  }
+
   async function searchSong(serviceName) {
     switch (serviceName) {
       case 'spotify': {
-        return openUrl(
-          `https://open.spotify.com/search/${state.artist} - ${state.title}`,
-        );
+        return openUrl(`https://open.spotify.com/search/${state.searchQueue}`);
       }
       case 'apple': {
         try {
           let responce = await fetch(
-            `http://podcast.rnr.fm/searchSong/${state.artist} - ${state.title}`,
+            `http://podcast.rnr.fm/searchSong/${state.searchQueue}`,
           );
           responce = await responce.json();
           return openUrl(responce);
@@ -157,7 +160,7 @@ export function AppProvider({children}) {
       }
       case 'yandex': {
         return openUrl(
-          `https://music.yandex.ru/search?text=${state.artist} - ${state.title}`,
+          `https://music.yandex.ru/search?text=${state.searchQueue}`,
         );
       }
       default:
@@ -235,6 +238,7 @@ export function AppProvider({children}) {
         pauseStream,
         toggleMenu,
         toggleSearchMenu,
+        updateSearchQueue,
         searchSong,
         playPodcast,
         openUrl,

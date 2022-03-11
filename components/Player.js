@@ -20,7 +20,8 @@ import {useGlobalContext} from './context';
 
 //Code
 export default function Player() {
-  const {playStream, pauseStream, toggleSearchMenu, state} = useGlobalContext();
+  const {playStream, pauseStream, toggleSearchMenu, updateSearchQueue, state} =
+    useGlobalContext();
   const {title, artist, cover, isPlaying, firstPlay, playerState, playerMode} =
     state;
 
@@ -87,7 +88,10 @@ export default function Player() {
           <Text style={styles.artist}>{artist}</Text>
           {title && artist && (
             <TouchableOpacity
-              onPress={() => toggleSearchMenu(true)}
+              onPress={() => {
+                toggleSearchMenu(true);
+                updateSearchQueue(`${title} - ${artist}`);
+              }}
               style={[styles.searchButton, {height: infoHeight}]}>
               <Icon name={'search'} size={25} color={colors.white} />
             </TouchableOpacity>

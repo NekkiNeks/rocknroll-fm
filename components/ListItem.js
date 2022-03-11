@@ -1,18 +1,25 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import {useGlobalContext} from './context';
 import {colors} from './theme';
 
 export default function ListItem({name, time}) {
+  const {updateSearchQueue, toggleSearchMenu} = useGlobalContext();
   let [artist, title] = name.split(' - ');
   title = title.length > 30 ? title.slice(0, 30) + '...' : title;
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        updateSearchQueue(`${artist} - ${title}`);
+        toggleSearchMenu(true);
+      }}>
       <View>
         <Text style={[styles.text, styles.title]}>{title}</Text>
         <Text style={[styles.text, styles.artist]}>{artist}</Text>
       </View>
       <Text style={[styles.text, styles.time]}>{time}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 

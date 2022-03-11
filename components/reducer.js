@@ -40,6 +40,9 @@ function reducer(state, action) {
     case 'TOGGLE_SEARCH_MENU': {
       return {...state, showSearchMenu: action.payload};
     }
+    case 'UPDATE_SEARCH_QUEUE': {
+      return {...state, searchQueue: action.payload};
+    }
     case 'SET_CURRENT_PODCAST': {
       return {...state, currentPodcast: action.payload};
     }
