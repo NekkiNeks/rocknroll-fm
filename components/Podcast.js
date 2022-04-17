@@ -18,28 +18,27 @@ export default function Podcast({
   date,
   id,
   shareLink,
+  audioLink,
 }) {
   const {playPodcast, state, shareMessage} = useGlobalContext();
   const {currentPodcast} = state;
 
   const thisPodcastPlaying = currentPodcast === id;
 
-  const stringDuration = (duration / 60000).toFixed();
+  const stringDuration = (duration / 60).toFixed();
 
-  const messageForShare = `${strings.podcastMessage}https://anchor.fm${shareLink}`;
+  const messageForShare = `${strings.podcastMessage}${shareLink}`;
 
   async function addPodcast() {
-    let url = await fetch(`http://podcast.rnr.fm/podcasts/${id}`);
-    url = await url.json();
     const Track = {
-      url: url, // Load media from the network
+      url: audioLink, // Load media from the network
       title: title,
       artist: 'RNRFM',
       album: 'podcast',
       genre: 'RocknRoll',
       date: date, // RFC 3339
       artwork: image, // Load artwork from the network
-      duration: duration / 1000, // Duration in seconds
+      duration: duration, // Duration in seconds
     };
     console.log('track is ready');
     playPodcast(Track, id);
@@ -47,7 +46,10 @@ export default function Podcast({
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Image source={{uri: image}} style={styles.image} />
+        <Image
+          source={{uri: image, cache: 'only-if-cached'}}
+          style={styles.image}
+        />
         <Text style={[styles.text, styles.title]}>{title}</Text>
       </View>
       {thisPodcastPlaying ? (

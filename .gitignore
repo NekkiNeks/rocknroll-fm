@@ -30,8 +30,8 @@ local.properties
 *.iml
 *.hprof
 
-/android/app/release/app-release.aab
-/android/app/debug/app-debug.aab
+android/app/release/
+android/app/debug/
 
 # node.js
 #
