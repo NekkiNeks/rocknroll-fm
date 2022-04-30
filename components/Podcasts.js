@@ -15,7 +15,7 @@ export default function Podcasts({route}) {
 
   async function getPodcasts() {
     try {
-      let res = await fetch(`http://192.168.1.33:4000/${path}`);
+      let res = await fetch(`http://podcast.rnr.fm/${path}`);
       res = await res.json();
       console.log(res);
       if (res.status === 'error') {
