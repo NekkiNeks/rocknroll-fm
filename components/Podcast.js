@@ -46,10 +46,7 @@ export default function Podcast({
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Image
-          source={{uri: image, cache: 'only-if-cached'}}
-          style={styles.image}
-        />
+        <Image source={{uri: image}} style={styles.image} />
         <Text style={[styles.text, styles.title]}>{title}</Text>
       </View>
       {thisPodcastPlaying ? (

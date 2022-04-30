@@ -40,7 +40,7 @@ export function AppProvider({children}) {
     // Player options
     await TrackPlayer.updateOptions({
       stopWithApp: true,
-      capabilities: [Capability.Play, Capability.Pause, Capability.SeekTo],
+      capabilities: [Capability.Play, Capability.Pause],
       compactCapabilities: [Capability.Play, Capability.Pause],
       alwaysPauseOnInterruption: true,
     });
@@ -65,6 +65,9 @@ export function AppProvider({children}) {
     if (state.init) {
       await TrackPlayer.reset();
       await TrackPlayer.add([streamInfo]);
+      await TrackPlayer.updateOptions({
+        capabilities: [Capability.Play, Capability.Pause],
+      });
       dispatch({type: 'INIT_TOGGLE', payload: false});
     }
     if (state.playerMode === 'podcast') {
@@ -91,6 +94,9 @@ export function AppProvider({children}) {
     await TrackPlayer.reset();
     dispatch({type: 'SET_CURRENT_PODCAST', payload: id});
     await TrackPlayer.add(podcast);
+    await TrackPlayer.updateOptions({
+      capabilities: [Capability.Play, Capability.Pause, Capability.SeekTo],
+    });
     TrackPlayer.play();
     dispatch({type: 'TOGGLE_PODCAST_PLAYING', payload: true});
     dispatch({type: 'PLAYER_MODE_TOGGLE', payload: 'podcast'});
