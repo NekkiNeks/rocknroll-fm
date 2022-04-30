@@ -17,7 +17,11 @@ export default function Podcasts({route}) {
     try {
       let res = await fetch(`http://podcast.rnr.fm/${path}`);
       res = await res.json();
-      setPodcasts(res);
+      console.log(res);
+      if (res.status === 'error') {
+        throw new Error('server was responced with error');
+      }
+      setPodcasts(res.responce);
       setLoading(false);
     } catch (err) {
       setLoading(false);

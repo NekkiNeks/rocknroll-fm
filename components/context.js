@@ -147,16 +147,16 @@ export function AppProvider({children}) {
         return openUrl(`https://open.spotify.com/search/${state.searchQueue}`);
       }
       case 'apple': {
-        try {
-          let responce = await fetch(
-            `http://podcast.rnr.fm/searchSong/${state.searchQueue}`,
-          );
-          responce = await responce.json();
-          return openUrl(responce);
-        } catch (e) {
-          console.log(e.message);
-          return openUrl('https://music.apple.com/search');
+        let responce = await fetch(
+          `http://podcast.rnr.fm/searchSong/${state.searchQueue}`,
+        );
+        responce = await responce.json();
+        if (responce.status === 'ok') {
+          openUrl(responce.link);
+        } else {
+          openUrl('https://music.apple.com/search');
         }
+        break;
       }
       case 'yandex': {
         return openUrl(
