@@ -555,7 +555,7 @@
 				CODE_SIGN_ENTITLEMENTS = test_poject/test_poject.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TN9C97FG72;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = test_poject/Info.plist;
@@ -564,6 +564,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -589,7 +590,7 @@
 				CODE_SIGN_ENTITLEMENTS = test_poject/test_poject.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TN9C97FG72;
 				INFOPLIST_FILE = test_poject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -597,6 +598,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
