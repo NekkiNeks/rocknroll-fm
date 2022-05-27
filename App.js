@@ -42,9 +42,9 @@ function App() {
             <Tab.Screen name="PodcastsMenu" component={PodcastsMenu} />
             <Tab.Screen name="List" component={List} />
           </Tab.Navigator>
-          <Menu />
-          <SearchMenu />
         </SafeAreaView>
+        <Menu />
+        <SearchMenu />
       </NavigationContainer>
     </AppProvider>
   );
